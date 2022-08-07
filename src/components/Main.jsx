@@ -14,7 +14,6 @@ const Error = React.lazy(() => import("./Error"));
 const Signin = React.lazy(() => import("./Auth/SignIn"));
 const Signup = React.lazy(() => import("./Auth/SignUp"));
 const Admin = React.lazy(() => import("./AdminPanel/AdminPanel"));
-const Profile = React.lazy(() => import("./Account/AccountView"));
 
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
 const defaultUserSate = {
@@ -79,13 +78,6 @@ function Main() {
             exact
             path={user && user.role === "admin" ? "/admin" : "/"}
             element={<Admin setSnackbarState={setSnackbarState} />}
-          />
-          <Route
-            exact
-            path="/profile"
-            element={
-              <Profile setSnackbarState={setSnackbarState} user={user} />
-            }
           />
           <Route path="*" element={<Error />} />
         </Routes>
