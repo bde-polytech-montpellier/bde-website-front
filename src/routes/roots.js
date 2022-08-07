@@ -1,0 +1,8 @@
+export const clubs    = "http://localhost:8000/api/clubs/"
+export const events   = "http://localhost:8000/api/events/"
+export const partners = "http://localhost:8000/api/partners/"
+export const promos   = "http://localhost:8000/api/promos/"
+export const users    = "http://localhost:8000/api/users/"
+export const roles    = "http://localhost:8000/api/roles/"
+export const signup   = "http://localhost:8000/api/signup/"
+export const signin   = "http://localhost:8000/api/signin/"
