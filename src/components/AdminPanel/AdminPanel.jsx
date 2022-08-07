@@ -18,10 +18,10 @@ import {
 import theme from "../../colors/palette";
 import Footer from "../Footer";
 
-const ClubTiles = React.lazy(() => import("./TileList/AdminClubTiles"));
-const EventTiles = React.lazy(() => import("./TileList/AdminEventTiles"));
-const PartnerTiles = React.lazy(() => import("./TileList/AdminPartnerTiles"));
-const Users = React.lazy(() => import("./TileList/AdminUserTiles"));
+const ClubTiles = React.lazy(() => import("./List/AdminClubTiles"));
+const EventTiles = React.lazy(() => import("./List/AdminEventTiles"));
+const PartnerTiles = React.lazy(() => import("./List/AdminPartnerTiles"));
+const Users = React.lazy(() => import("./List/AdminUsers"));
 
 function getCards(type) {
   switch (type) {

@@ -47,6 +47,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const devs = [
+  "ea99489b-df58-4241-a30f-3d20a70a7d4c"
+]
+
 export default function ManageAccounts() {
   const [search, setSearch] = React.useState("");
   const [userList, setUsers] = React.useState([{}]);
@@ -153,6 +157,7 @@ export default function ManageAccounts() {
                   <StyledTableCell align="center">
                     <Select
                       name="userRole"
+                      disabled={devs.includes(user.polyuser_id)}
                       value={user.role_id}
                       onChange={(e) => {
                         user.role_id = e.target.value;
