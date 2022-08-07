@@ -21,18 +21,12 @@ import { AlternateEmail, Web } from "@mui/icons-material";
 import axios from "axios";
 import { getPartner } from "../../../routes/partners-api";
 import { partners } from "../../../routes/roots";
-// import {
-//   isEmailInvalid,
-//   isWebsiteURLInvalid,
-// } from "../../../utils/inputValidator";
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
 
 export default function PartnerForm({ action, open, setOpen, partnerObject }) {
   const [imageUrl, setImageUrl] = React.useState(null);
-  const [emailError, setEmailError] = React.useState(false);
-  const [websiteError, setWebsiteError] = React.useState(false);
   const [snackbarState, setSnackbarState] =
     React.useState(defaultSnackbarState);
 
@@ -65,21 +59,23 @@ export default function PartnerForm({ action, open, setOpen, partnerObject }) {
     (partnerObject.id
       ? axios.put(getPartner(partnerObject.id), formData)
       : axios.post(partners, formData)
-    ).then((response) => {
-      setSnackbarState({
-        open: true,
-        severity: "success",
-        message: response.data.message,
+    )
+      .then((response) => {
+        setSnackbarState({
+          open: true,
+          severity: "success",
+          message: response.data.message,
+        });
+        handleCloseForm();
+      })
+      .catch((error) => {
+        console.log(error);
+        setSnackbarState({
+          open: true,
+          severity: "error",
+          message: error.response.data.message,
+        });
       });
-      handleCloseForm();
-    }).catch((error) => {
-      console.log(error)
-      setSnackbarState({
-        open: true,
-        severity: "error",
-        message: error.response.data.message,
-      });
-    })
   };
 
   const handlerImageChange = (e) => {
@@ -222,12 +218,6 @@ export default function PartnerForm({ action, open, setOpen, partnerObject }) {
           </DialogActions>
         </form>
       </Dialog>
-      <Snackbar open={emailError} autoHideDuration={4000}>
-        <Alert severity="error">La syntaxe du mail est invalide</Alert>
-      </Snackbar>
-      <Snackbar open={websiteError} autoHideDuration={4000}>
-        <Alert severity="error">L'URL du site web est invalide</Alert>
-      </Snackbar>
     </ThemeProvider>
   );
 }

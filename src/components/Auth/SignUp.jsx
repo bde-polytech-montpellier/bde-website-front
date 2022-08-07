@@ -5,8 +5,6 @@ import {
   Button,
   CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
   Grid,
   Box,
@@ -35,9 +33,21 @@ export default function SignUp({ setSnackbarState, setUser, user }) {
   const [formValues, setFormValues] = React.useState(defaultValue);
   const [cookies, setCookie, removeCookie] = useCookies([cookieToken]);
 
+  const uMontpellierMail = /^[^\s@]+@(umontpellier.fr|etu.umontpellier.fr)$/;
+
   const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!uMontpellierMail.test(formValues.mail)) {
+      setSnackbarState({
+        open: true,
+        severity: "info",
+        message: "L'addresse mail doit être celle de l'université",
+      });
+      return;
+    }
+
     const payload = {
       ...formValues,
       name: formValues.firstName + " " + formValues.lastName,
@@ -178,7 +188,11 @@ export default function SignUp({ setSnackbarState, setUser, user }) {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href={"/signin"} variant="body2" display={user.id ? "none" : ""}>
+                <Link
+                  href={"/signin"}
+                  variant="body2"
+                  display={user.id ? "none" : ""}
+                >
                   Already have an account? Sign in
                 </Link>
               </Grid>
