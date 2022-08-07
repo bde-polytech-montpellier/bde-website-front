@@ -108,7 +108,7 @@ export default function EventForm({ action, open, setOpen, eventObject }) {
     const { name, value } = e.target;
     setFormValues({
       ...formValues,
-      [name]: value === "" ? null : value,
+      [name]: value,
     });
   };
 
