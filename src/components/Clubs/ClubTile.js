@@ -84,10 +84,10 @@ export default function Tile({
         <CardActions>
           <Stack sx={{ width: 1 }}>
             <Stack direction="row" spacing={2}>
-              <IconButton color="primary" aria-label="facebook" href={club.fb}>
+              <IconButton color="primary" aria-label="facebook" href={club.fb} disabled={!club.fb}>
                 <Facebook />
               </IconButton>
-              <IconButton color="error" aria-label="instagram" href={club.ig}>
+              <IconButton color="error" aria-label="instagram" href={club.ig} disabled={!club.ig}>
                 <Instagram />
               </IconButton>
             </Stack>
