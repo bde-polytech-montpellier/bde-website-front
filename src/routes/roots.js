@@ -1,8 +1,10 @@
-export const clubs    = "https://bde-api.cluster-ig3.igpolytech.fr/api/clubs/"
-export const events   = "https://bde-api.cluster-ig3.igpolytech.fr/api/events/"
-export const partners = "https://bde-api.cluster-ig3.igpolytech.fr/api/partners/"
-export const promos   = "https://bde-api.cluster-ig3.igpolytech.fr/api/promos/"
-export const users    = "https://bde-api.cluster-ig3.igpolytech.fr/api/users/"
-export const roles    = "https://bde-api.cluster-ig3.igpolytech.fr/api/roles/"
-export const signup   = "https://bde-api.cluster-ig3.igpolytech.fr/api/signup/"
-export const signin   = "https://bde-api.cluster-ig3.igpolytech.fr/api/signin/"
+const baseURL = "https://bde-api.cluster-ig3.igpolytech.fr";
+
+export const clubs = baseURL + "/api/clubs/";
+export const events = baseURL + "/api/events/";
+export const partners = baseURL + "/api/partners/";
+export const promos = baseURL + "/api/promos/";
+export const users = baseURL + "/api/users/";
+export const roles = baseURL + "/api/roles/";
+export const signup = baseURL + "/api/signup/";
+export const signin = baseURL + "/api/signin/";

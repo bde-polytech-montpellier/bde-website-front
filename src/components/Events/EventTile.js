@@ -23,6 +23,7 @@ import { CalendarMonth, AccessTime, Place } from "@mui/icons-material";
 import { getEvent } from "../../routes/events-api";
 import { red } from "@mui/material/colors";
 import { dateParser } from "../../utils/dateParser";
+import noImage from "../../static/no-image.webp"
 
 export default function Tile({
   id,
@@ -73,7 +74,7 @@ export default function Tile({
   };
 
   return (
-    <Grid item key={id} xs={12} sm={4} md={3}>
+    <Grid item key={id} xs={6} sm={4} md={3}>
       <Card
         sx={{
           height: "100%",
@@ -98,7 +99,7 @@ export default function Tile({
               pt: 0,
               height: 200,
             }}
-            image={event.pic}
+            image={event.pic ?? noImage}
             alt="random"
           />
           <CardContent sx={{ flexGrow: 1 }}>

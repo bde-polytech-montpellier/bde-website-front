@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import { AlternateEmail, Link } from "@mui/icons-material";
 import { getPartner } from "../../routes/partners-api";
+import noImage from "../../static/no-image.webp";
 
 export default function Tile({
   id,
@@ -54,14 +55,14 @@ export default function Tile({
   };
 
   return (
-    <Grid item key={id} xs={12} sm={4} md={3}>
+    <Grid item key={id} xs={6} sm={4} md={3}>
       <Card
         sx={{
           height: "100%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-        } }
+        }}
       >
         <CardActionArea onClick={handleClickOpen}>
           <CardMedia
@@ -70,7 +71,7 @@ export default function Tile({
               pt: 0,
               height: 200,
             }}
-            image={partner.pic}
+            image={partner.pic ?? noImage}
             alt="random"
           />
           <CardContent sx={{ flexGrow: 1 }}>

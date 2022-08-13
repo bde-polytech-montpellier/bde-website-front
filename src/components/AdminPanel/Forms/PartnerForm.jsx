@@ -69,7 +69,6 @@ export default function PartnerForm({ action, open, setOpen, partnerObject }) {
         handleCloseForm();
       })
       .catch((error) => {
-        console.log(error);
         setSnackbarState({
           open: true,
           severity: "error",

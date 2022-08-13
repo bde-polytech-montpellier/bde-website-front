@@ -20,7 +20,6 @@ function Clubs() {
   function getClubs() {
     axios.get(clubs).then(res => {
       setClubs(res.data);
-      console.log(res.data)
     });
   }
 

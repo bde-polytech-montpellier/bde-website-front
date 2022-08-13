@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import { Facebook, Instagram } from "@mui/icons-material";
 import { getClub } from "../../routes/clubs-api";
+import noImage from "../../static/no-image.webp";
 
 export default function Tile({
   id,
@@ -43,9 +44,8 @@ export default function Tile({
     ig: ig,
   };
 
-  
   const [club, setClub] = React.useState(defaultValues);
-  
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -55,7 +55,7 @@ export default function Tile({
   };
 
   return (
-    <Grid item key={id} xs={12} sm={4} md={3}>
+    <Grid item key={id} xs={6} sm={4} md={3}>
       <Card
         sx={{
           height: "100%",
@@ -71,7 +71,7 @@ export default function Tile({
               pt: 0,
               height: 200,
             }}
-            image={club.pic}
+            image={club.pic ?? noImage}
             alt="random"
           />
           <CardContent sx={{ flexGrow: 1 }}>
@@ -84,10 +84,20 @@ export default function Tile({
         <CardActions>
           <Stack sx={{ width: 1 }}>
             <Stack direction="row" spacing={2}>
-              <IconButton color="primary" aria-label="facebook" href={club.fb} disabled={!club.fb}>
+              <IconButton
+                color="primary"
+                aria-label="facebook"
+                href={club.fb}
+                disabled={!club.fb}
+              >
                 <Facebook />
               </IconButton>
-              <IconButton color="error" aria-label="instagram" href={club.ig} disabled={!club.ig}>
+              <IconButton
+                color="error"
+                aria-label="instagram"
+                href={club.ig}
+                disabled={!club.ig}
+              >
                 <Instagram />
               </IconButton>
             </Stack>
