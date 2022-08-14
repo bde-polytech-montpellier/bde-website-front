@@ -25,7 +25,7 @@ export default function Footer(){
           color="text.secondary"
           component="p"
         >
-        Vous avez rencontrés des problèmes ou avez des suggestions ?
+        Vous avez rencontré des problèmes ou avez des suggestions ?
         
         Vous pouvez contacter <Link href='mailto:lucas.nouguier@etu.umontpellier.fr'>Lucas Nouguier</Link> ou <Link href='mailto:jason.moret@etu.umontpellier.fr'>Jason Moret</Link>
         </Typography>
