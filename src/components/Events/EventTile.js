@@ -124,7 +124,7 @@ export default function Tile({
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
           {event.name}
-          <Stack direction="row" spacing={1}>
+          <Stack direction={{xs: "column", md: "row"}} spacing={1}>
             <Chip icon={<Place />} label={event.place} size="small"></Chip>
             <Chip
               icon={<CalendarMonth />}
