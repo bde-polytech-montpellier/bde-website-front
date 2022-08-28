@@ -21,11 +21,15 @@ import {
   Input,
   InputAdornment,
   Button,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
 import { Search } from "@mui/icons-material";
 import { updateUserPermission } from "../../../routes/users-api";
+
+const defaultSnackbarState = { open: false, severity: "info", message: "" };
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -47,9 +51,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const devs = [
-  "ea99489b-df58-4241-a30f-3d20a70a7d4c"
-]
+const devs = ["ea99489b-df58-4241-a30f-3d20a70a7d4c"];
 
 export default function ManageAccounts() {
   const [search, setSearch] = React.useState("");
@@ -59,15 +61,26 @@ export default function ManageAccounts() {
   const [changes, setChanges] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [snackbarState, setSnackbarState] =
+    React.useState(defaultSnackbarState);
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") return;
+    else setSnackbarState(defaultSnackbarState);
+  };
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
-    
+
     setFilteredUsers(
       userList.filter(
         (user) =>
-          user.polyuser_name.toLowerCase().includes(event.target.value.toLowerCase()) ||
-          user.polyuser_mail.toLowerCase().includes(event.target.value.toLowerCase())
+          user.polyuser_name
+            .toLowerCase()
+            .includes(event.target.value.toLowerCase()) ||
+          user.polyuser_mail
+            .toLowerCase()
+            .includes(event.target.value.toLowerCase())
       )
     );
   };
@@ -82,8 +95,23 @@ export default function ManageAccounts() {
   };
 
   const changePermissions = () => {
-    
-    axios.patch(updateUserPermission(), { changes });
+    axios
+      .patch(updateUserPermission(), { changes })
+      .then((response) => {
+        setSnackbarState({
+          open: true,
+          severity: "success",
+          message: response.data.message,
+        });
+      })
+      .catch((error) => {
+        setSnackbarState({
+          open: true,
+          severity: "error",
+          message: error.response.data.message,
+        });
+      });
+    setChanges([]);
   };
 
   React.useEffect(() => {
@@ -98,6 +126,15 @@ export default function ManageAccounts() {
 
   return (
     <main>
+      <Snackbar
+        open={snackbarState.open}
+        autoHideDuration={5000}
+        onClose={handleSnackbarClose}
+      >
+        <Alert onClose={handleSnackbarClose} severity={snackbarState.severity}>
+          {snackbarState.message}
+        </Alert>
+      </Snackbar>
       <Container sx={{ py: 10 }} maxWidth="lg">
         <Typography
           component="h1"
