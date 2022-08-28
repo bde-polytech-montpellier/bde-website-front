@@ -68,7 +68,7 @@ export default function SignUp({ setSnackbarState, setUser, user }) {
           setSnackbarState({
             open: true,
             severity: "success",
-            message: response.data.msg,
+            message: response.data.message,
           });
           navigate("/signin");
         })
@@ -76,7 +76,7 @@ export default function SignUp({ setSnackbarState, setUser, user }) {
       setSnackbarState({
         open: true,
         severity: "error",
-        message: error.response.data.msg,
+        message: error.response.data.message,
       });
     });
   };

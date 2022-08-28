@@ -52,7 +52,7 @@ export default function SignIn({ setSnackbarState, setUser }) {
         setSnackbarState({
           open: true,
           severity: "success",
-          message: response.data.msg,
+          message: response.data.message,
         });
         setUser(response.data.userPayload);
         setCookie(cookieUser, response.data.userPayload, {
