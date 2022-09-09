@@ -51,13 +51,13 @@ export default function Events() {
             </Typography>
           </Container>
         </Box>
-        <Container>
+        {/* <Container>
           <Divider>NEXT EVENTS</Divider>
-        </Container>
+        </Container> */}
         <EventTiles cards={eventList}></EventTiles>
-        <Container>
+        {/* <Container>
           <Divider orientation="horizontal">PAST EVENTS</Divider>
-        </Container>
+        </Container> */}
         {/* <Tiles cards={pastEvents}></Tiles> */}
       </main>
       <Footer />
