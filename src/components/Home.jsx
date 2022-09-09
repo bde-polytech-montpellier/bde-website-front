@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Footer from "./Footer";
-import polytechMtp from "../static/polytechMontpellier.webp";
+import teamBde from "../static/teamBde.webp";
 
 const theme = createTheme();
 
@@ -42,7 +42,7 @@ function Home() {
         </Box>
         <Container sx={{ py: 0, textAlign: "center" }} maxWidth="lg">
           <Box>
-            <img src={polytechMtp} alt="polytch montpellier" style={{width: "100%", maxWidth: "600px"}}></img>
+            <img src={teamBde} alt="team bde" style={{width: "100%", maxWidth: "600px"}}></img>
           </Box>
         </Container>
       </main>
