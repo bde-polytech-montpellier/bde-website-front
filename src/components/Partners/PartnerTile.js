@@ -67,10 +67,6 @@ export default function Tile({
         <CardActionArea onClick={handleClickOpen}>
           <CardMedia
             component="img"
-            sx={{
-              pt: 0,
-              height: 200,
-            }}
             image={partner.pic ?? noImage}
             alt="random"
           />

@@ -1,6 +1,5 @@
 import { CssBaseline, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
-import "../style/Error.css";
 
 function Error() {
   return (

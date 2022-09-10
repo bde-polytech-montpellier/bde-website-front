@@ -95,10 +95,6 @@ export default function Tile({
           />
           <CardMedia
             component="img"
-            sx={{
-              pt: 0,
-              height: 200,
-            }}
             image={event.pic ?? noImage}
             alt="random"
           />

@@ -9,7 +9,7 @@ const Home = React.lazy(() => import("./Home"));
 const Clubs = React.lazy(() => import("./Clubs/Clubs"));
 const Parts = React.lazy(() => import("./Partners/Partners"));
 const Events = React.lazy(() => import("./Events/Events"));
-const Prev = React.lazy(() => import("./Prev"));
+const Prev = React.lazy(() => import("./Prevention/Prev"));
 const Error = React.lazy(() => import("./Error"));
 const Signin = React.lazy(() => import("./Auth/SignIn"));
 const Signup = React.lazy(() => import("./Auth/SignUp"));

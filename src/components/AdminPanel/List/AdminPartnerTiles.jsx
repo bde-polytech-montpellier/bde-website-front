@@ -1,4 +1,3 @@
-import "../../../style/Parts.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import {partners} from "../../../routes/roots";

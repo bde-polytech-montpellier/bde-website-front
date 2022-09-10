@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import { AccountCircle, Face, Search } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
-import logobde from "../../static/logo.jpeg";
+import logobde from "../../static/logo.webp";
 import { styled, alpha } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
 import "../../style/Nav.css";

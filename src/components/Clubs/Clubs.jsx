@@ -1,4 +1,3 @@
-import "../../style/Clubs.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { clubs } from "../../routes/roots";
