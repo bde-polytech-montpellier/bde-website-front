@@ -115,7 +115,7 @@ export default function Tile({
         <Divider orientation="horizontal" flexItem />
         <DialogContent>
           <DialogContentText>
-            {partner.description.split("\n\n").map((str, idx) => (
+            {partner.description.split("\r\n").map((str, idx) => (
               <p key={idx}>{str}</p>
             ))}
           </DialogContentText>
