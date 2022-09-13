@@ -103,10 +103,10 @@ export default function Tile({
               {event.name}
             </Typography>
             <Typography gutterBottom variant="h6">
-              {event.price
-                ? event.price > 0
-                  ? event.price + "€"
-                  : "Gratuit"
+              {event.price > 0
+                ? event.price + "€"
+                : event.price === 0
+                ? "Gratuit"
                 : "Prix non défini"}
             </Typography>
             <Typography>{event.short_desc}</Typography>
