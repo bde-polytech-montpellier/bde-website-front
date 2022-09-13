@@ -25,6 +25,32 @@ import { red } from "@mui/material/colors";
 import { dateParser } from "../../utils/dateParser";
 import noImage from "../../static/no-image.webp";
 
+function displayPrice(price, followerPrice) {
+  if (price === null) {
+    return (
+      <Typography variant="h6" align="right">
+        Prix non défini
+      </Typography>
+    );
+  }
+
+  if (price === 0) {
+    return (
+      <Typography variant="h6" align="right">
+        Gratuit
+      </Typography>
+    );
+  }
+
+  return (
+    <div>
+      <Typography variant="h6" align="right">
+        {price + "€ (adhérent " + (followerPrice ?? 0) + "€)"}
+      </Typography>
+    </div>
+  );
+}
+
 export default function Tile({
   id,
   name,
@@ -35,6 +61,7 @@ export default function Tile({
   time,
   datetime,
   price,
+  follower_price,
   place,
   club_id,
   club_name,
@@ -54,6 +81,7 @@ export default function Tile({
     datetime: datetime ?? "Date non défnie",
     place: place,
     price: price,
+    follower_price: follower_price,
     club_id: club_id,
     club_name: club_name,
   };
@@ -102,13 +130,7 @@ export default function Tile({
             <Typography gutterBottom variant="h5">
               {event.name}
             </Typography>
-            <Typography gutterBottom variant="h6">
-              {event.price > 0
-                ? event.price + "€"
-                : event.price === 0
-                ? "Gratuit"
-                : "Prix non défini"}
-            </Typography>
+            {displayPrice(event.price, event.follower_price)}
             <Typography>{event.short_desc}</Typography>
           </CardContent>
         </CardActionArea>

@@ -19,6 +19,7 @@ export default function Tiles({ cards }) {
             event_time,
             event_datetime,
             event_price,
+            event_price_follower,
             event_place,
             event_club_id,
             club_name,
@@ -34,6 +35,7 @@ export default function Tiles({ cards }) {
               time={event_time}
               datetime={event_datetime}
               price={event_price}
+              follower_price={event_price_follower}
               place={event_place}
               club_id={event_club_id}
               club_name={club_name}

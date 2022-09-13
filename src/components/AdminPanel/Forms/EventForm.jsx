@@ -54,6 +54,7 @@ export default function EventForm({ action, open, setOpen, eventObject }) {
     place: eventObject.place ?? "",
     datetime: eventObject.datetime ?? "",
     price: eventObject.price ?? "",
+    follower_price: eventObject.follower_price ?? "",
     club_id: eventObject.club_id ?? "",
     club_name: eventObject.club_name ?? "",
   };
@@ -97,10 +98,11 @@ export default function EventForm({ action, open, setOpen, eventObject }) {
   };
 
   const handleClubNameChange = (e, value) => {
+    const club = clubsList.get(value);
     setFormValues({
       ...formValues,
-      club_id: clubsList.get(value),
-      club_name: value,
+      club_id: club ?? "",
+      club_name: value ?? "",
     });
   };
 
@@ -173,25 +175,43 @@ export default function EventForm({ action, open, setOpen, eventObject }) {
                 variant="standard"
                 value={formValues.short_description}
                 onChange={handleInputChange}
-                sx={{ mt: 1 }}
+                sx={{ mt: 4 }}
                 fullWidth
                 required
+                multiline
               ></TextField>
-              <TextField
-                name="price"
-                label="Prix"
-                variant="standard"
-                type="number"
-                inputProps={{ min: 0 }}
-                value={formValues.price}
-                onChange={handleInputChange}
-                sx={{ mt: 1, ml: 4 }}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">€</InputAdornment>
-                  ),
-                }}
-              ></TextField>
+              <Stack>
+                <TextField
+                  name="price"
+                  label="Prix standard"
+                  variant="standard"
+                  type="number"
+                  inputProps={{ min: 0 }}
+                  value={formValues.price}
+                  onChange={handleInputChange}
+                  sx={{ mt: 1, ml: 4 }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">€</InputAdornment>
+                    ),
+                  }}
+                />
+                <TextField
+                  name="follower_price"
+                  label="Prix adhérent"
+                  variant="standard"
+                  type="number"
+                  inputProps={{ min: 0 }}
+                  value={formValues.follower_price}
+                  onChange={handleInputChange}
+                  sx={{ mt: 1, ml: 4 }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">€</InputAdornment>
+                    ),
+                  }}
+                />
+              </Stack>
             </Stack>
             <Grid container spacing={2} sx={{ mt: 2 }}>
               <Grid item xs={12} md={6}>

@@ -13,6 +13,7 @@ export default function Tile({
   time,
   datetime,
   price,
+  follower_price,
   place,
   club_id,
   club_name,
@@ -28,11 +29,12 @@ export default function Tile({
       time={time}
       datetime={datetime}
       price={price}
+      follower_price={follower_price}
       place={place}
       club_id={club_id}
-      club_name={ club_name }
-      TileActions={ TileActions }
-      EventForm={ EventForm }
+      club_name={club_name}
+      TileActions={TileActions}
+      EventForm={EventForm}
     ></EventTile>
   );
 }

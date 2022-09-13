@@ -204,7 +204,7 @@ export default function ManageAccounts() {
                       }}
                     >
                       {roleList.map((role) => (
-                        <MenuItem value={role.role_id}>
+                        <MenuItem value={role.role_id} key={role.role_id}>
                           {role.role_name}
                         </MenuItem>
                       ))}
