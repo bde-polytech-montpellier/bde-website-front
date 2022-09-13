@@ -23,7 +23,7 @@ import { CalendarMonth, AccessTime, Place } from "@mui/icons-material";
 import { getEvent } from "../../routes/events-api";
 import { red } from "@mui/material/colors";
 import { dateParser } from "../../utils/dateParser";
-import noImage from "../../static/no-image.webp"
+import noImage from "../../static/no-image.webp";
 
 export default function Tile({
   id,
@@ -103,7 +103,11 @@ export default function Tile({
               {event.name}
             </Typography>
             <Typography gutterBottom variant="h6">
-              {(event.price ?? 0) + "€"}
+              {event.price
+                ? event.price > 0
+                  ? event.price + "€"
+                  : "Gratuit"
+                : "Prix non défini"}
             </Typography>
             <Typography>{event.short_desc}</Typography>
           </CardContent>
@@ -120,7 +124,7 @@ export default function Tile({
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
           {event.name}
-          <Stack direction={{xs: "column", md: "row"}} spacing={1}>
+          <Stack direction={{ xs: "column", md: "row" }} spacing={1}>
             <Chip icon={<Place />} label={event.place} size="small"></Chip>
             <Chip
               icon={<CalendarMonth />}
