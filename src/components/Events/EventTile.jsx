@@ -146,14 +146,20 @@ export default function Tile({
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
           {event.name}
-          <Stack direction={{ xs: "column", md: "row" }} spacing={1}>
-            <Chip icon={<Place />} label={event.place} size="small"></Chip>
-            <Chip
-              icon={<CalendarMonth />}
-              label={event.date}
-              size="small"
-            ></Chip>
-            <Chip icon={<AccessTime />} label={event.time} size="small"></Chip>
+          <Stack direction={{ xs: "column", md: "row" }} spacing={1} flex>
+            {event.place && (
+              <Chip icon={<Place />} label={event.place} size="small" />
+            )}
+            {event.date && (
+              <Chip
+                icon={<CalendarMonth />}
+                label={dateParser(event.date)}
+                size="small"
+              />
+            )}
+            {event.time && (
+              <Chip icon={<AccessTime />} label={event.time} size="small" />
+            )}
           </Stack>
         </DialogTitle>
         <Divider flexItem />
