@@ -14,6 +14,7 @@ import {
   Handshake,
   Groups,
   ManageAccounts,
+  AddShoppingCart,
 } from "@mui/icons-material";
 import theme from "../../colors/palette";
 import Footer from "../Footer";
@@ -22,6 +23,7 @@ const ClubTiles = React.lazy(() => import("./List/AdminClubTiles"));
 const EventTiles = React.lazy(() => import("./List/AdminEventTiles"));
 const PartnerTiles = React.lazy(() => import("./List/AdminPartnerTiles"));
 const Users = React.lazy(() => import("./List/AdminUsers"));
+const Goodies = React.lazy(() => import("./List/AdminGoodieTiles"));
 
 function getCards(type) {
   switch (type) {
@@ -33,6 +35,8 @@ function getCards(type) {
       return <PartnerTiles />;
     case "users":
       return <Users />;
+    case "goodies":
+      return <Goodies />;
     default:
       return null;
   }
@@ -52,6 +56,9 @@ function AdminPanel() {
   };
   const usersClick = () => {
     setCardType("users");
+  };
+  const goodiesClick = () => {
+    setCardType("goodies");
   };
 
   return (
@@ -105,8 +112,11 @@ function AdminPanel() {
               <Button variant="contained" color="green" onClick={eventsClick}>
                 <LocalActivity />
               </Button>
-              <Button variant="contained" color="yellow" onClick={usersClick}>
+              <Button variant="contained" color="greeny" onClick={usersClick}>
                 <ManageAccounts />
+              </Button>
+              <Button variant="contained" color="pink" onClick={goodiesClick}>
+                <AddShoppingCart />
               </Button>
             </Stack>
           </Container>

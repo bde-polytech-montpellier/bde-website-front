@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { blue, green, purple, red, teal } from "@mui/material/colors";
+import { blue, green, purple, red, teal, pink } from "@mui/material/colors";
 
 const { palette } = createTheme();
 
@@ -25,9 +25,14 @@ export default createTheme({
         main: purple[400],
       },
     }),
-    yellow: palette.augmentColor({
+    greeny: palette.augmentColor({
       color: {
         main: teal[400],
+      },
+    }),
+    pink: palette.augmentColor({
+      color: {
+        main: pink[300],
       },
     }),
   },

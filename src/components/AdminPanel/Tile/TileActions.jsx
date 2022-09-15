@@ -96,6 +96,7 @@ export default function TileActions({ api, entity, Form, setInfo }) {
         partnerObject={entity}
         clubObject={entity}
         eventObject={entity}
+        goodieObject={entity}
       ></Form>
       {/* Remove confirmation */}
       <Dialog open={remove} onClose={cancelRemovePartner}>

@@ -10,6 +10,7 @@ const Clubs = React.lazy(() => import("./Clubs/Clubs"));
 const Parts = React.lazy(() => import("./Partners/Partners"));
 const Events = React.lazy(() => import("./Events/Events"));
 const Prev = React.lazy(() => import("./Prevention/Prev"));
+const Goodies = React.lazy(() => import("./Goodies/Goodies"));
 const Error = React.lazy(() => import("./Error"));
 const Signin = React.lazy(() => import("./Auth/SignIn"));
 const Signup = React.lazy(() => import("./Auth/SignUp"));
@@ -56,6 +57,7 @@ function Main() {
           <Route exact path="/parts" element={<Parts />} />
           <Route exact path="/events" element={<Events />} />
           <Route exact path="/prev" element={<Prev />} />
+          <Route exact path="/goodies" element={<Goodies />} />
           <Route
             exact
             path={user.id ? "/" : "/signin"}

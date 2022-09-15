@@ -35,6 +35,7 @@ function ResponsiveAppBar({ loggedUser, setUser, setSnackbarState }) {
     { name: "Partenariats", link: "/parts" },
     { name: "Prévention", link: "/prev" },
     { name: "Events", link: "/events" },
+    { name: "Goodies", link: "/goodies" },
   ];
 
   const handleDisconnect = () => {
