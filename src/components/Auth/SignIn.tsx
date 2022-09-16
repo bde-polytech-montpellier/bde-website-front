@@ -35,17 +35,15 @@ const theme = createTheme();
 export default function SignIn(params: SignInParams) {
   const navigate = useNavigate();
 
-  const handleSubmit = async (
-    event: React.BaseSyntheticEvent<Event, EventTarget & Element, EventTarget>
-  ) => {
+  const [credentials, setCredentials] = React.useState({
+    mail: "",
+    password: "",
+  });
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const payload = {
-      mail: data.get("mail"),
-      password: data.get("password"),
-    };
     axios
-      .post(signin, payload)
+      .post(signin, credentials)
       .then((response) => {
         params.setSnackbarState({
           open: true,
@@ -66,6 +64,14 @@ export default function SignIn(params: SignInParams) {
           message: error.response.data.message,
         });
       });
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setCredentials({
+      ...credentials,
+      [name]: value,
+    });
   };
 
   return (
@@ -119,6 +125,7 @@ export default function SignIn(params: SignInParams) {
                 name="mail"
                 autoComplete="mail"
                 autoFocus
+                onChange={handleInputChange}
               />
               <TextField
                 margin="normal"
@@ -129,6 +136,7 @@ export default function SignIn(params: SignInParams) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={handleInputChange}
               />
               <Button
                 type="submit"

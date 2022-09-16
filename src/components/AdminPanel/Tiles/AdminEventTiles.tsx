@@ -1,30 +1,33 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
 import * as React from "react";
+import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import GoodieTile from "../Tile/AdminGoodieTile";
+import EventTile from "../../Events/EventTile";
+import TileActions from "../TileActions";
+import axios from "axios";
+import { events } from "../../../routes/roots";
 import { Box, Button, Typography } from "@mui/material";
-import { goodies } from "../../../routes/roots";
-import { IGoodie } from "../../../models/tiles";
-const GoodieForm = React.lazy(() => import("../Forms/GoodieForm"));
+import EventForm from "../Forms/EventForm";
+import { IEvent } from "../../../models/tiles";
 
-export default function AdminGoodieTiles() {
-  const [goodieLists, setGoodies] = useState([]);
+export default function AdminEventTiles() {
+  const [eventList, setEvents] = useState([]);
   const [openForm, setOpenForm] = React.useState(false);
 
   const handleSetOpenForm = () => {
     setOpenForm(true);
   };
-  function getGoodies() {
-    axios.get(goodies).then((res) => {
-      setGoodies(res.data);
-    });
+
+  async function getEvents() {
+    const eventsList = await axios.get(events);
+
+    setEvents(eventsList.data);
   }
 
   useEffect(() => {
-    getGoodies();
+    getEvents();
   }, []);
+
   return (
     <Container sx={{ py: 10 }} maxWidth="lg">
       <Typography
@@ -34,7 +37,7 @@ export default function AdminGoodieTiles() {
         color="text.primary"
         gutterBottom
       >
-        {"Les goodies"}
+        {"Les Events"}
       </Typography>
       <Box textAlign={"center"}>
         <Button
@@ -47,11 +50,15 @@ export default function AdminGoodieTiles() {
         </Button>
       </Box>
       <Grid container spacing={4}>
-        {goodieLists.map((goodie: IGoodie) => (
-          <GoodieTile key={goodie.goodie_id} goodie={goodie} />
+        {eventList.map((event: IEvent) => (
+          <EventTile
+            key={event.event_id}
+            event={event}
+            TileActions={TileActions}
+          />
         ))}
       </Grid>
-      <GoodieForm open={openForm} setOpen={setOpenForm} goodie={{}} />
+      <EventForm open={openForm} setOpen={setOpenForm} event={{}}></EventForm>
     </Container>
   );
 }

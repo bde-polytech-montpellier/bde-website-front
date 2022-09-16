@@ -3,27 +3,28 @@ import axios from "axios";
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import ClubTile from "../../Clubs/ClubTile";
+import GoodieTile from "../../Goodies/GoodieTile";
+import TileActions from "../TileActions";
 import { Box, Button, Typography } from "@mui/material";
-import { clubs } from "../../../routes/roots";
-import ClubForm from "../Forms/ClubForm";
-import { IClub } from "../../../models/tiles";
+import { goodies } from "../../../routes/roots";
+import { IGoodie } from "../../../models/tiles";
+const GoodieForm = React.lazy(() => import("../Forms/GoodieForm"));
 
-export default function AdminClubTiles() {
-  const [clubLists, setClubs] = useState([]);
+export default function AdminGoodieTiles() {
+  const [goodieLists, setGoodies] = useState([]);
   const [openForm, setOpenForm] = React.useState(false);
 
   const handleSetOpenForm = () => {
     setOpenForm(true);
   };
-  function getClubs() {
-    axios.get(clubs).then((res) => {
-      setClubs(res.data);
+  function getGoodies() {
+    axios.get(goodies).then((res) => {
+      setGoodies(res.data);
     });
   }
 
   useEffect(() => {
-    getClubs();
+    getGoodies();
   }, []);
   return (
     <Container sx={{ py: 10 }} maxWidth="lg">
@@ -34,7 +35,7 @@ export default function AdminClubTiles() {
         color="text.primary"
         gutterBottom
       >
-        {"Les clubs"}
+        {"Les goodies"}
       </Typography>
       <Box textAlign={"center"}>
         <Button
@@ -47,11 +48,15 @@ export default function AdminClubTiles() {
         </Button>
       </Box>
       <Grid container spacing={4}>
-        {clubLists.map((club: IClub) => (
-          <ClubTile key={club.club_id!} club={club} />
+        {goodieLists.map((goodie: IGoodie) => (
+          <GoodieTile
+            key={goodie.goodie_id}
+            goodie={goodie}
+            TileActions={TileActions}
+          />
         ))}
       </Grid>
-      <ClubForm open={openForm} setOpen={setOpenForm} club={{}} />
+      <GoodieForm open={openForm} setOpen={setOpenForm} goodie={{}} />
     </Container>
   );
 }

@@ -4,7 +4,8 @@ import { partners } from "../../../routes/roots";
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import Tile from "../Tile/AdminPartnerTile";
+import Tile from "../../Partners/PartnerTile";
+import TileActions from "../TileActions";
 import { Box, Button, Typography } from "@mui/material";
 import { IPartner } from "../../../models/tiles";
 const PartnerForm = React.lazy(() => import("../Forms/PartnerForm"));
@@ -49,7 +50,11 @@ export default function AdminPartnersTiles() {
       </Box>
       <Grid container spacing={4}>
         {partnerships.map((partner: IPartner) => (
-          <Tile key={partner.partenaire_id} partner={partner} />
+          <Tile
+            key={partner.partner_id!}
+            partner={partner}
+            TileActions={TileActions}
+          />
         ))}
       </Grid>
       <PartnerForm

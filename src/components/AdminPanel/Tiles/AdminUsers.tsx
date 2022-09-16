@@ -68,10 +68,8 @@ export default function ManageAccounts() {
     setSnackbarState(defaultSnackbarState);
   };
 
-  const handleSearchChange = (
-    event: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>,
-    value: string
-  ) => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
     setSearch(value);
 
     setFilteredUsers(
@@ -83,10 +81,7 @@ export default function ManageAccounts() {
     );
   };
 
-  const handleChangePage = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    newPage: number
-  ) => {
+  const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
 

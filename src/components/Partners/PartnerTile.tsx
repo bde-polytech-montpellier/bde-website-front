@@ -100,11 +100,9 @@ export default function Tile(params: IPartnerTile) {
         <DialogTitle>{partner.partner_name}</DialogTitle>
         <Divider orientation="horizontal" flexItem />
         <DialogContent>
-          <DialogContentText>
-            {partner.partner_description!.split("\r\n").map((str, idx) => (
-              <p key={idx}>{str}</p>
-            ))}
-          </DialogContentText>
+          {partner.partner_description!.split("\r\n").map((str, idx) => (
+            <DialogContentText key={idx}>{str}</DialogContentText>
+          ))}
         </DialogContent>
         <Divider orientation="horizontal" flexItem />
         <DialogActions>

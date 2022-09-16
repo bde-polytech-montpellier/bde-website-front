@@ -2,6 +2,35 @@ import { createTheme } from "@mui/material";
 import { blue, green, purple, red, teal, pink } from "@mui/material/colors";
 
 const { palette } = createTheme();
+declare module "@mui/material/styles" {
+  interface Palette {
+    blue?: Palette["primary"];
+    red?: Palette["primary"];
+    green?: Palette["primary"];
+    purple?: Palette["primary"];
+    greeny?: Palette["primary"];
+    pink?: Palette["primary"];
+  }
+  interface PaletteOptions {
+    blue?: PaletteOptions["primary"];
+    red?: PaletteOptions["primary"];
+    green?: PaletteOptions["primary"];
+    purple?: PaletteOptions["primary"];
+    greeny?: PaletteOptions["primary"];
+    pink?: PaletteOptions["primary"];
+  }
+}
+
+declare module "@mui/material/Button" {
+  interface ButtonPropsColorOverrides {
+    blue: true;
+    red: true;
+    green: true;
+    purple: true;
+    greeny: true;
+    pink: true;
+  }
+}
 
 export default createTheme({
   palette: {

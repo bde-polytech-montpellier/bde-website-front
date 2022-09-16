@@ -13,8 +13,8 @@ import {
 } from "@mui/material";
 import { Edit, DeleteForever } from "@mui/icons-material";
 import axios from "axios";
-import theme from "../../../colors/palette";
-import { ITileActions } from "../../../models/componentFacto";
+import theme from "../../colors/palette";
+import { ITileActions } from "../../models/componentFacto";
 
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
 

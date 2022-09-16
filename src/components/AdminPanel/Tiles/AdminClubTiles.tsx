@@ -1,32 +1,31 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import * as React from "react";
-import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import EventTile from "../Tile/AdminEventTile";
-import axios from "axios";
-import { events } from "../../../routes/roots";
+import ClubTile from "../../Clubs/ClubTile";
+import TileActions from "../TileActions";
 import { Box, Button, Typography } from "@mui/material";
-import EventForm from "../Forms/EventForm";
-import { IEvent } from "../../../models/tiles";
+import { clubs } from "../../../routes/roots";
+import ClubForm from "../Forms/ClubForm";
+import { IClub } from "../../../models/tiles";
 
-export default function AdminEventTiles() {
-  const [eventList, setEvents] = useState([]);
+export default function AdminClubTiles() {
+  const [clubLists, setClubs] = useState([]);
   const [openForm, setOpenForm] = React.useState(false);
 
   const handleSetOpenForm = () => {
     setOpenForm(true);
   };
-
-  async function getEvents() {
-    const eventsList = await axios.get(events);
-
-    setEvents(eventsList.data);
+  function getClubs() {
+    axios.get(clubs).then((res) => {
+      setClubs(res.data);
+    });
   }
 
   useEffect(() => {
-    getEvents();
+    getClubs();
   }, []);
-
   return (
     <Container sx={{ py: 10 }} maxWidth="lg">
       <Typography
@@ -36,7 +35,7 @@ export default function AdminEventTiles() {
         color="text.primary"
         gutterBottom
       >
-        {"Les Events"}
+        {"Les clubs"}
       </Typography>
       <Box textAlign={"center"}>
         <Button
@@ -49,11 +48,11 @@ export default function AdminEventTiles() {
         </Button>
       </Box>
       <Grid container spacing={4}>
-        {eventList.map((event: IEvent) => (
-          <EventTile key={event.event_id} event={event} />
+        {clubLists.map((club: IClub) => (
+          <ClubTile key={club.club_id!} club={club} TileActions={TileActions} />
         ))}
       </Grid>
-      <EventForm open={openForm} setOpen={setOpenForm} event={{}}></EventForm>
+      <ClubForm open={openForm} setOpen={setOpenForm} club={{}} />
     </Container>
   );
 }
