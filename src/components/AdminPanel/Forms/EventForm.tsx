@@ -37,7 +37,7 @@ export default function EventForm(params: IEventForm) {
     React.useState(defaultSnackbarState);
 
   const handleCloseForm = () => {
-    params.setOpen(false);
+    params.setOpenForm(false);
   };
 
   const handleSnackbarClose = () => {

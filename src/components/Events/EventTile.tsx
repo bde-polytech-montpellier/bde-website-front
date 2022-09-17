@@ -1,30 +1,11 @@
 import * as React from "react";
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Grid,
-  Typography,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  CardActionArea,
-  Divider,
-  Stack,
-  CardHeader,
-  Avatar,
-  Chip,
-} from "@mui/material";
+import { Typography, Stack, CardHeader, Avatar, Chip } from "@mui/material";
 import { CalendarMonth, AccessTime, Place } from "@mui/icons-material";
 import { getEvent } from "../../routes/events-api";
 import { red } from "@mui/material/colors";
 import { dateParser } from "../../utils/dateParser";
-import noImage from "../../static/no-image.webp";
 import { IEventTile, IEvent } from "../../models/tiles";
+import Card from "../templates/Card";
 
 function displayPrice(price?: number, followerPrice?: number) {
   if (price === null) {
@@ -52,8 +33,7 @@ function displayPrice(price?: number, followerPrice?: number) {
   );
 }
 
-export default function Tile(params: IEventTile) {
-  const [open, setOpen] = React.useState(false);
+export default function EventTile(params: IEventTile) {
   const [event, setEvent] = React.useState<IEvent>({
     event_id: params.event.event_id,
     event_name: params.event.event_name,
@@ -70,96 +50,80 @@ export default function Tile(params: IEventTile) {
     club_name: params.event.club_name,
   });
 
+  const openEditForm = () => {
+    params.setInfo!(event);
+    params.setOpenForm!(true);
+  };
+
   function displayDate() {
     if (event.event_date && event.event_date!.length > 0)
       return dateParser(event.event_date);
     else return event.event_datetime;
   }
 
-  const handleClickOpen = async () => {
-    setOpen(true);
+  const buildHeader = () => (
+    <CardHeader
+      avatar={
+        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+          {(event.club_name ?? "BDE").charAt(0)}
+        </Avatar>
+      }
+      title={event.club_name ?? "BDE"}
+      subheader={displayDate()}
+    />
+  );
+
+  const buildBody = () => (
+    <div>
+      {displayPrice(event.event_price, event.event_follower_price)}
+      <Typography>{event.event_short_description}</Typography>
+    </div>
+  );
+
+  const buildFooter = () => {
+    if (params.TileActions)
+      return (
+        <params.TileActions
+          api={getEvent(event.event_id!)}
+          entity={event}
+          setInfo={setEvent}
+          openForm={openEditForm}
+        />
+      );
+    else return <span />;
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const buildDialogTitle = () => (
+    <div>
+      {event.event_name}
+      <Stack direction={{ xs: "column", md: "row" }} spacing={1}>
+        {event.event_place && (
+          <Chip icon={<Place />} label={event.event_place} size="small" />
+        )}
+        {event.event_date && (
+          <Chip
+            icon={<CalendarMonth />}
+            label={dateParser(event.event_date)}
+            size="small"
+          />
+        )}
+        {event.event_time && (
+          <Chip icon={<AccessTime />} label={event.event_time} size="small" />
+        )}
+      </Stack>
+    </div>
+  );
 
   return (
-    <Grid item key={event.event_id} xs={6} sm={4} md={3}>
-      <Card
-        sx={{
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
-      >
-        <CardActionArea onClick={handleClickOpen}>
-          <CardHeader
-            avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                {(event.club_name ?? "BDE").charAt(0)}
-              </Avatar>
-            }
-            title={event.club_name ?? "BDE"}
-            subheader={displayDate()}
-          />
-          <CardMedia
-            component="img"
-            image={event.event_pic ?? noImage}
-            alt="random"
-          />
-          <CardContent sx={{ flexGrow: 1 }}>
-            <Typography gutterBottom variant="h5">
-              {event.event_name}
-            </Typography>
-            {displayPrice(event.event_price, event.event_follower_price)}
-            <Typography>{event.event_short_description}</Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          {params.TileActions && (
-            <params.TileActions
-              api={getEvent(event.event_id!)}
-              entity={event}
-              setInfo={setEvent}
-              openForm={params.openForm}
-            />
-          )}
-        </CardActions>
-      </Card>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>
-          {event.event_name}
-          <Stack direction={{ xs: "column", md: "row" }} spacing={1}>
-            {event.event_place && (
-              <Chip icon={<Place />} label={event.event_place} size="small" />
-            )}
-            {event.event_date && (
-              <Chip
-                icon={<CalendarMonth />}
-                label={dateParser(event.event_date)}
-                size="small"
-              />
-            )}
-            {event.event_time && (
-              <Chip
-                icon={<AccessTime />}
-                label={event.event_time}
-                size="small"
-              />
-            )}
-          </Stack>
-        </DialogTitle>
-        <Divider flexItem />
-        <DialogContent>
-          <DialogContentText>{event.event_description}</DialogContentText>
-        </DialogContent>
-        <Divider flexItem />
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
-      </Dialog>
-    </Grid>
+    <Card
+      id={event.event_id!}
+      img={event.event_pic}
+      header={buildHeader}
+      name={event.event_name!}
+      body={buildBody}
+      footer={buildFooter}
+      dialogTitle={buildDialogTitle}
+      dialogBodyText={event.event_description!}
+    />
   );
 }

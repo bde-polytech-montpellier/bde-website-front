@@ -13,6 +13,14 @@ const PartnerForm = React.lazy(() => import("../Forms/PartnerForm"));
 export default function AdminPartnersTiles() {
   const [openForm, setOpenForm] = React.useState(false);
   const [partnerships, setParts] = useState([]);
+  const [chosenPartner, setChosenPartner] = useState<IPartner>({
+    partner_id: "",
+    partner_name: "",
+    partner_short_description: "",
+    partner_description: "",
+    partner_mail: "",
+    partner_website: "",
+  });
 
   async function getParts() {
     const parts = await axios.get(partners);
@@ -54,13 +62,15 @@ export default function AdminPartnersTiles() {
             key={partner.partner_id!}
             partner={partner}
             TileActions={TileActions}
+            setInfo={setChosenPartner}
+            setOpenForm={setOpenForm}
           />
         ))}
       </Grid>
       <PartnerForm
         open={openForm}
-        setOpen={setOpenForm}
-        partner={{}}
+        setOpenForm={setOpenForm}
+        partner={chosenPartner}
       ></PartnerForm>
     </Container>
   );

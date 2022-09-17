@@ -14,6 +14,7 @@ import {
   DialogTitle,
   CardActionArea,
   Divider,
+  Typography,
 } from "@mui/material";
 import noImage from "../../static/no-image.webp";
 
@@ -39,13 +40,16 @@ export default function Tile(comps: ICard) {
         }}
       >
         <CardActionArea onClick={handleClickOpen}>
-          <comps.header />
+          {comps.header && <comps.header />}
           <CardMedia
             component="img"
             image={comps.img ?? noImage}
             alt="random"
           />
           <CardContent sx={{ flexGrow: 1 }}>
+            <Typography gutterBottom variant="h5" component="h2">
+              {comps.name}
+            </Typography>
             <comps.body />
           </CardContent>
         </CardActionArea>
@@ -67,9 +71,9 @@ export default function Tile(comps: ICard) {
         {comps.dialogBodyText && (
           <div>
             <DialogContent>
-              <DialogContentText>
-                <comps.dialogBodyText />
-              </DialogContentText>
+              {comps.dialogBodyText.split("\r\n").map((str, idx) => (
+                <DialogContentText key={idx}>{str}</DialogContentText>
+              ))}
             </DialogContent>
             <Divider flexItem />
           </div>

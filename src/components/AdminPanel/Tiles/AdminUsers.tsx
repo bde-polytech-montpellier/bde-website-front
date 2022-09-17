@@ -184,36 +184,38 @@ export default function ManageAccounts() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredUsers.map((user) => (
-                <StyledTableRow key={user.polyuser_id}>
-                  <StyledTableCell component="th" scope="row" align="center">
-                    {user.polyuser_name}
-                  </StyledTableCell>
-                  <StyledTableCell align="center">
-                    {user.polyuser_mail}
-                  </StyledTableCell>
-                  <StyledTableCell align="center">
-                    <Select
-                      name="userRole"
-                      disabled={devs.includes(user.polyuser_id!)}
-                      value={user.role_id}
-                      onChange={(e) => {
-                        user.role_id = Number(e.target.value);
-                        setChanges({
-                          ...changes,
-                          [user.polyuser_id!]: e.target.value,
-                        });
-                      }}
-                    >
-                      {roleList.map((role: IRole) => (
-                        <MenuItem value={role.role_id!} key={role.role_id!}>
-                          {role.role_name!}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
+              {filteredUsers
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((user) => (
+                  <StyledTableRow key={user.polyuser_id}>
+                    <StyledTableCell component="th" scope="row" align="center">
+                      {user.polyuser_name}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      {user.polyuser_mail}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      <Select
+                        name="userRole"
+                        disabled={devs.includes(user.polyuser_id!)}
+                        value={user.role_id}
+                        onChange={(e) => {
+                          user.role_id = Number(e.target.value);
+                          setChanges({
+                            ...changes,
+                            [user.polyuser_id!]: e.target.value,
+                          });
+                        }}
+                      >
+                        {roleList.map((role: IRole) => (
+                          <MenuItem value={role.role_id!} key={role.role_id!}>
+                            {role.role_name!}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>

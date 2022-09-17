@@ -53,7 +53,7 @@ export interface IPrevTeam {
 
 export interface ITileActionInfo {
   TileActions?: React.FC<ITileActions>;
-  openForm?: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenForm?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IClubTile extends ITileActionInfo {
@@ -76,30 +76,24 @@ export interface IPartnerTile extends ITileActionInfo {
   setInfo?: React.Dispatch<React.SetStateAction<IPartner>>;
 }
 
-export interface IFormParams {}
-
-export interface IClubForm extends IFormParams {
+export interface IClubForm extends IClubTile {
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  club: IClub;
+  setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export interface IEventForm extends IFormParams {
+export interface IEventForm extends IEventTile {
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  event: IEvent;
+  setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export interface IGoodieForm extends IFormParams {
+export interface IGoodieForm extends IGoodieTile {
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  goodie: IGoodie;
+  setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export interface IPartnerForm extends IFormParams {
+export interface IPartnerForm extends IPartnerTile {
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  partner: IPartner;
+  setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IUser {

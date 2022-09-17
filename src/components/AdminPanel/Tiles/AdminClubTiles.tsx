@@ -13,6 +13,15 @@ import { IClub } from "../../../models/tiles";
 export default function AdminClubTiles() {
   const [clubLists, setClubs] = useState([]);
   const [openForm, setOpenForm] = React.useState(false);
+  const [chosenClub, setChosenClub] = useState<IClub>({
+    club_id: undefined,
+    club_name: undefined,
+    club_short_description: undefined,
+    club_description: undefined,
+    club_pic: undefined,
+    club_fb: undefined,
+    club_ig: undefined,
+  });
 
   const handleSetOpenForm = () => {
     setOpenForm(true);
@@ -49,10 +58,16 @@ export default function AdminClubTiles() {
       </Box>
       <Grid container spacing={4}>
         {clubLists.map((club: IClub) => (
-          <ClubTile key={club.club_id!} club={club} TileActions={TileActions} />
+          <ClubTile
+            key={club.club_id!}
+            club={club}
+            setInfo={setChosenClub}
+            TileActions={TileActions}
+            setOpenForm={setOpenForm}
+          />
         ))}
       </Grid>
-      <ClubForm open={openForm} setOpen={setOpenForm} club={{}} />
+      <ClubForm open={openForm} setOpenForm={setOpenForm} club={chosenClub} />
     </Container>
   );
 }

@@ -13,6 +13,21 @@ import { IEvent } from "../../../models/tiles";
 export default function AdminEventTiles() {
   const [eventList, setEvents] = useState([]);
   const [openForm, setOpenForm] = React.useState(false);
+  const [chosenEvent, setChosenEvent] = React.useState<IEvent>({
+    event_id: undefined,
+    event_name: undefined,
+    event_short_description: undefined,
+    event_pic: undefined,
+    event_description: undefined,
+    event_date: undefined,
+    event_time: undefined,
+    event_place: undefined,
+    event_datetime: undefined,
+    event_price: undefined,
+    event_follower_price: undefined,
+    event_club_id: undefined,
+    club_name: undefined,
+  });
 
   const handleSetOpenForm = () => {
     setOpenForm(true);
@@ -55,10 +70,16 @@ export default function AdminEventTiles() {
             key={event.event_id}
             event={event}
             TileActions={TileActions}
+            setInfo={setChosenEvent}
+            setOpenForm={setOpenForm}
           />
         ))}
       </Grid>
-      <EventForm open={openForm} setOpen={setOpenForm} event={{}}></EventForm>
+      <EventForm
+        open={openForm}
+        setOpenForm={setOpenForm}
+        event={chosenEvent}
+      ></EventForm>
     </Container>
   );
 }

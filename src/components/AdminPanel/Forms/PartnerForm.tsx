@@ -33,14 +33,14 @@ export default function PartnerForm(params: IPartnerForm) {
     React.useState(defaultSnackbarState);
 
   const handleCloseForm = () => {
-    params.setOpen(false);
+    params.setOpenForm!(false);
   };
 
   const handleSnackbarClose = () => {
     setSnackbarState(defaultSnackbarState);
   };
 
-  const defaultValues = {
+  const [formValues, setFormValues] = React.useState({
     name: params.partner.partner_name ?? "",
     pic: new File([""], ""),
     imgChanged: false,
@@ -48,8 +48,7 @@ export default function PartnerForm(params: IPartnerForm) {
     description: params.partner.partner_description ?? "",
     mail: params.partner.partner_mail ?? "",
     website: params.partner.partner_website ?? "",
-  };
-  const [formValues, setFormValues] = React.useState(defaultValues);
+  });
 
   const sendFormData = (event: React.FormEvent) => {
     event.preventDefault();

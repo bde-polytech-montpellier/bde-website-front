@@ -32,6 +32,17 @@ declare module "@mui/material/Button" {
   }
 }
 
+declare module "@mui/material/IconButton" {
+  interface IconButtonPropsColorOverrides {
+    blue: true;
+    red: true;
+    green: true;
+    purple: true;
+    greeny: true;
+    pink: true;
+  }
+}
+
 export default createTheme({
   palette: {
     blue: palette.augmentColor({

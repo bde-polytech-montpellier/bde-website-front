@@ -32,7 +32,7 @@ export default function GoodieForm(params: IGoodieForm) {
     React.useState(defaultSnackbarState);
 
   const handleCloseForm = () => {
-    params.setOpen(false);
+    params.setOpenForm(false);
   };
 
   const handleSnackbarClose = () => {

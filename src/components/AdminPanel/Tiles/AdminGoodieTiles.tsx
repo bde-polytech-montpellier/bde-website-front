@@ -13,6 +13,13 @@ const GoodieForm = React.lazy(() => import("../Forms/GoodieForm"));
 export default function AdminGoodieTiles() {
   const [goodieLists, setGoodies] = useState([]);
   const [openForm, setOpenForm] = React.useState(false);
+  const [chosenGoodie, setChosenGoodie] = React.useState<IGoodie>({
+    goodie_id: undefined,
+    goodie_name: undefined,
+    goodie_description: undefined,
+    goodie_pic: undefined,
+    goodie_price: undefined,
+  });
 
   const handleSetOpenForm = () => {
     setOpenForm(true);
@@ -53,10 +60,16 @@ export default function AdminGoodieTiles() {
             key={goodie.goodie_id}
             goodie={goodie}
             TileActions={TileActions}
+            setInfo={setChosenGoodie}
+            setOpenForm={setOpenForm}
           />
         ))}
       </Grid>
-      <GoodieForm open={openForm} setOpen={setOpenForm} goodie={{}} />
+      <GoodieForm
+        open={openForm}
+        setOpenForm={setOpenForm}
+        goodie={chosenGoodie}
+      />
     </Container>
   );
 }

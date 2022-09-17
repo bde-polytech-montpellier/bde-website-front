@@ -76,7 +76,7 @@ export default function TileActions(params: ITileActions) {
         <Button
           size="small"
           variant="contained"
-          // color="red"
+          color="red"
           onClick={openConfirmation}
         >
           <DeleteForever />
@@ -84,7 +84,7 @@ export default function TileActions(params: ITileActions) {
         <Button
           size="small"
           variant="contained"
-          // color="green"
+          color="green"
           onClick={handleSetOpenForm}
         >
           <Edit />
