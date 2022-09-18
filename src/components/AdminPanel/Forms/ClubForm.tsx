@@ -52,6 +52,14 @@ export default function ClubForm(params: IClubForm) {
 
   const sendFormData = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formValues.name || !formValues.short_description) {
+      setSnackbarState({
+        open: true,
+        severity: "info",
+        message: "Name and short description are required",
+      });
+      return;
+    }
     let formData = new FormData();
     for (const [key, value] of Object.entries(formValues)) {
       formData.set(key, value.toString());
@@ -114,8 +122,8 @@ export default function ClubForm(params: IClubForm) {
       <Dialog open={params.open} onClose={handleCloseForm}>
         <DialogTitle id={"clubDialogTitle"}>{"Éditer un club"}</DialogTitle>
         <Divider flexItem />
-        <DialogContent>
-          <form onSubmit={sendFormData}>
+        <form onSubmit={sendFormData}>
+          <DialogContent>
             <TextField
               id="club_name"
               name="name"
@@ -136,20 +144,18 @@ export default function ClubForm(params: IClubForm) {
               sx={{ mt: 1 }}
               fullWidth
               required
-            ></TextField>
+            />
             <Grid container spacing={2} sx={{ mt: 2 }}>
               <Grid item xs={12} sm={6}>
-                <Stack spacing={2}>
-                  <TextField
-                    id="club_description"
-                    name="description"
-                    label="Description"
-                    value={formValues.description}
-                    onChange={handleInputChange}
-                    style={{ width: "100%" }}
-                    multiline
-                  />
-                </Stack>
+                <TextField
+                  id="club_description"
+                  name="description"
+                  label="Description"
+                  value={formValues.description}
+                  onChange={handleInputChange}
+                  style={{ width: "100%" }}
+                  multiline
+                />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Stack spacing={1} alignItems="center">
@@ -209,20 +215,14 @@ export default function ClubForm(params: IClubForm) {
                 </Box>
               </Grid>
             </Grid>
-          </form>
-        </DialogContent>
-        <Divider flexItem />
-        <DialogActions>
-          <Button onClick={handleCloseForm}>Annuler</Button>
-          <Button onClick={sendFormData}>Valider</Button>
-        </DialogActions>
+          </DialogContent>
+          <Divider flexItem />
+          <DialogActions>
+            <Button onClick={handleCloseForm}>Annuler</Button>
+            <Button type="submit">Valider</Button>
+          </DialogActions>
+        </form>
       </Dialog>
-      {/* <Snackbar open={igError} autoHideDuration={4000}>
-        <Alert severity="error">L'URL instagram est invalide</Alert>
-      </Snackbar>
-      <Snackbar open={fbError} autoHideDuration={4000}>
-        <Alert severity="error">L'URL facebook est invalide</Alert>
-      </Snackbar> */}
     </ThemeProvider>
   );
 }

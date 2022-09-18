@@ -52,6 +52,14 @@ export default function PartnerForm(params: IPartnerForm) {
 
   const sendFormData = (event: React.FormEvent) => {
     event.preventDefault();
+    if (!formValues.name || !formValues.short_description) {
+      setSnackbarState({
+        open: true,
+        severity: "info",
+        message: "Name and short description are required",
+      });
+      return;
+    }
     let formData = new FormData();
     for (const [key, value] of Object.entries(formValues)) {
       formData.set(key, value.toString());
@@ -115,8 +123,8 @@ export default function PartnerForm(params: IPartnerForm) {
         <DialogTitle id={"partnerDialogTitle"}>
           {"Éditer un partenaire"}
         </DialogTitle>
-        <Divider flexItem />
         <form onSubmit={sendFormData}>
+          <Divider flexItem />
           <DialogContent>
             <TextField
               id="partner_name"
@@ -138,20 +146,18 @@ export default function PartnerForm(params: IPartnerForm) {
               onChange={handleInputChange}
               fullWidth
               required
-            ></TextField>
+            />
             <Grid container spacing={2} sx={{ mt: 2 }}>
               <Grid item xs={6}>
-                <Stack spacing={2}>
-                  <TextField
-                    id="partner_description"
-                    name="description"
-                    label="Description"
-                    value={formValues.description}
-                    onChange={handleInputChange}
-                    style={{ width: "100%" }}
-                    multiline
-                  />
-                </Stack>
+                <TextField
+                  id="partner_description"
+                  name="description"
+                  label="Description"
+                  value={formValues.description}
+                  onChange={handleInputChange}
+                  style={{ width: "100%" }}
+                  multiline
+                />
               </Grid>
               <Grid item xs={6}>
                 <Stack spacing={1} alignItems="center">

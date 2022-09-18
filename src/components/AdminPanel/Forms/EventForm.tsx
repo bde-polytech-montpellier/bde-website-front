@@ -63,6 +63,14 @@ export default function EventForm(params: IEventForm) {
 
   const sendFormData = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formValues.name || !formValues.short_description) {
+      setSnackbarState({
+        open: true,
+        severity: "info",
+        message: "Name and short description are required",
+      });
+      return;
+    }
     let formData = new FormData();
     for (const [key, value] of Object.entries(formValues)) {
       formData.set(key, value.toString());
@@ -100,7 +108,7 @@ export default function EventForm(params: IEventForm) {
 
   const handleClubNameChange = (
     e: React.SyntheticEvent<Element, Event>,
-    value: string | null
+    value: string | null,
   ) => {
     const club = clubsList.get(value ?? "");
     setFormValues({
@@ -123,7 +131,7 @@ export default function EventForm(params: IEventForm) {
       const list = new Map<string, string>(
         response.data.map((club: IClub) => {
           return [club.club_name, club.club_id];
-        })
+        }),
       );
       setClubs(list);
     });
@@ -145,7 +153,7 @@ export default function EventForm(params: IEventForm) {
         </Alert>
       </Snackbar>
       <Dialog open={params.open} onClose={handleCloseForm}>
-        <form id="event-form" onSubmit={sendFormData}>
+        <form onSubmit={sendFormData}>
           <DialogTitle id={"EventDialogTitle"}>{"Éditer un event"}</DialogTitle>
           <Divider flexItem />
           <DialogContent>
@@ -184,7 +192,7 @@ export default function EventForm(params: IEventForm) {
                 fullWidth
                 required
                 multiline
-              ></TextField>
+              />
               <Stack>
                 <TextField
                   name="price"
@@ -220,17 +228,15 @@ export default function EventForm(params: IEventForm) {
             </Stack>
             <Grid container spacing={2} sx={{ mt: 2 }}>
               <Grid item xs={12} md={6}>
-                <Stack spacing={2}>
-                  <TextField
-                    id="Event_description"
-                    name="description"
-                    label="Description"
-                    value={formValues.description}
-                    onChange={handleInputChange}
-                    style={{ width: "100%" }}
-                    multiline
-                  />
-                </Stack>
+                <TextField
+                  id="Event_description"
+                  name="description"
+                  label="Description"
+                  value={formValues.description}
+                  onChange={handleInputChange}
+                  style={{ width: "100%" }}
+                  multiline
+                />
               </Grid>
               <Grid item xs={12} md={6}>
                 <Stack spacing={1} alignItems="center">

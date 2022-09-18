@@ -50,6 +50,14 @@ export default function GoodieForm(params: IGoodieForm) {
 
   const sendFormData = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formValues.name) {
+      setSnackbarState({
+        open: true,
+        severity: "info",
+        message: "Name is required",
+      });
+      return;
+    }
     let formData = new FormData();
     for (const [key, value] of Object.entries(formValues)) {
       formData.set(key, value.toString());
@@ -111,8 +119,8 @@ export default function GoodieForm(params: IGoodieForm) {
       <Dialog open={params.open} onClose={handleCloseForm}>
         <DialogTitle id={"goodieDialogTitle"}>{"Éditer un goodie"}</DialogTitle>
         <Divider flexItem />
-        <DialogContent>
-          <form onSubmit={sendFormData}>
+        <form onSubmit={sendFormData}>
+          <DialogContent>
             <TextField
               id="goodie_name"
               name="name"
@@ -131,20 +139,18 @@ export default function GoodieForm(params: IGoodieForm) {
               value={formValues.price}
               onChange={handleInputChange}
               sx={{ mt: 1 }}
-            ></TextField>
+            />
             <Grid container spacing={2} sx={{ mt: 2 }}>
               <Grid item xs={12} sm={6}>
-                <Stack spacing={2}>
-                  <TextField
-                    id="goodie_description"
-                    name="description"
-                    label="Description"
-                    value={formValues.description}
-                    onChange={handleInputChange}
-                    style={{ width: "100%" }}
-                    multiline
-                  />
-                </Stack>
+                <TextField
+                  id="goodie_description"
+                  name="description"
+                  label="Description"
+                  value={formValues.description}
+                  onChange={handleInputChange}
+                  style={{ width: "100%" }}
+                  multiline
+                />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Stack spacing={1} alignItems="center">
@@ -178,13 +184,13 @@ export default function GoodieForm(params: IGoodieForm) {
                 </Stack>
               </Grid>
             </Grid>
-          </form>
-        </DialogContent>
-        <Divider flexItem />
-        <DialogActions>
-          <Button onClick={handleCloseForm}>Annuler</Button>
-          <Button onClick={sendFormData}>Valider</Button>
-        </DialogActions>
+          </DialogContent>
+          <Divider flexItem />
+          <DialogActions>
+            <Button onClick={handleCloseForm}>Annuler</Button>
+            <Button type="submit">Valider</Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </ThemeProvider>
   );
