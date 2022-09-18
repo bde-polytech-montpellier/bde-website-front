@@ -17,3 +17,9 @@ export interface ICard {
   dialogTitle: React.FC;
   dialogBodyText: string;
 }
+
+export interface ICardContainer {
+  title: string;
+  subtitle: string;
+  cards: JSX.Element[];
+}
