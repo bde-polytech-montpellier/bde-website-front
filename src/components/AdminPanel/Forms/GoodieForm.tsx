@@ -52,6 +52,7 @@ export default function GoodieForm(params: IGoodieForm) {
       goodie_price: undefined,
     });
     setFormValues(defaultState);
+    setImageUrl(undefined);
     params.setOpenForm(false);
   };
 

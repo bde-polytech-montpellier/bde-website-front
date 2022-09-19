@@ -53,6 +53,7 @@ export default function PartnerForm(params: IPartnerForm) {
       partner_website: undefined,
     });
     setFormValues(defaultState);
+    setImageUrl(undefined);
     params.setOpenForm(false);
   };
 

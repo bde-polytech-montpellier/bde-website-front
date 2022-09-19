@@ -55,6 +55,7 @@ export default function ClubForm(params: IClubForm) {
       club_ig: undefined,
     });
     setFormValues(defaultState);
+    setImageUrl(undefined);
     params.setOpenForm(false);
   };
 

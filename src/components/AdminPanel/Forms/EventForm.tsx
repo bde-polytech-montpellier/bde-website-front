@@ -70,6 +70,7 @@ export default function EventForm(params: IEventForm) {
       club_name: undefined,
     });
     setFormValues(defaultState);
+    setImageUrl(undefined);
     params.setOpenForm(false);
   };
 
