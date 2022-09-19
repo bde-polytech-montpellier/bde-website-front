@@ -52,6 +52,7 @@ export default function PartnerForm(params: IPartnerForm) {
       partner_mail: undefined,
       partner_website: undefined,
     });
+    setFormValues(defaultState);
     params.setOpenForm(false);
   };
 
@@ -119,7 +120,6 @@ export default function PartnerForm(params: IPartnerForm) {
   };
 
   React.useEffect(() => {
-    console.log(params.partner.partner_id);
     if (params.partner.partner_id) {
       setFormValues({
         ...formValues,

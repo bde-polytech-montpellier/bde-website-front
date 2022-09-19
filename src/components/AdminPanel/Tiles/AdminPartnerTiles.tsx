@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
 import { partners } from "../../../routes/roots";
 import * as React from "react";
@@ -11,9 +10,9 @@ import { IPartner } from "../../../models/tiles";
 const PartnerForm = React.lazy(() => import("../Forms/PartnerForm"));
 
 export default function AdminPartnersTiles() {
-  const [openForm, setOpenForm] = React.useState(false);
-  const [partnerships, setParts] = useState([]);
-  const [chosenPartner, setChosenPartner] = useState<IPartner>({
+  const [openForm, setOpenForm] = React.useState<boolean>(false);
+  const [partnerships, setParts] = React.useState<IPartner[]>([]);
+  const [chosenPartner, setChosenPartner] = React.useState<IPartner>({
     partner_id: "",
     partner_name: "",
     partner_short_description: "",
@@ -31,7 +30,7 @@ export default function AdminPartnersTiles() {
     setOpenForm(true);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     getParts();
   }, []);
 

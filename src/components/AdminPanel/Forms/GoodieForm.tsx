@@ -51,6 +51,7 @@ export default function GoodieForm(params: IGoodieForm) {
       goodie_description: undefined,
       goodie_price: undefined,
     });
+    setFormValues(defaultState);
     params.setOpenForm(false);
   };
 

@@ -69,6 +69,7 @@ export default function EventForm(params: IEventForm) {
       event_club_id: undefined,
       club_name: undefined,
     });
+    setFormValues(defaultState);
     params.setOpenForm(false);
   };
 
