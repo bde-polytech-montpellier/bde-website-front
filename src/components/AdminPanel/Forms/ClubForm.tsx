@@ -45,8 +45,15 @@ export default function ClubForm(params: IClubForm) {
     React.useState(defaultSnackbarState);
 
   const handleCloseForm = () => {
-    setFormValues(defaultState);
-    setImageUrl(undefined);
+    params.setInfo!({
+      club_id: undefined,
+      club_name: undefined,
+      club_short_description: undefined,
+      club_pic: undefined,
+      club_description: undefined,
+      club_fb: undefined,
+      club_ig: undefined,
+    });
     params.setOpenForm(false);
   };
 
@@ -125,10 +132,6 @@ export default function ClubForm(params: IClubForm) {
       });
       setImageUrl(params.club.club_pic);
     }
-    return () => {
-      setFormValues(defaultState);
-      setImageUrl(undefined);
-    };
   }, [params.club]);
 
   return (

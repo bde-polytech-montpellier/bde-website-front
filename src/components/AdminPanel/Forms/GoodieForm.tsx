@@ -44,8 +44,13 @@ export default function GoodieForm(params: IGoodieForm) {
     React.useState<IGoodieFormData>(defaultState);
 
   const handleCloseForm = () => {
-    setFormValues(defaultState);
-    setImageUrl(undefined);
+    params.setInfo!({
+      goodie_id: undefined,
+      goodie_name: undefined,
+      goodie_pic: undefined,
+      goodie_description: undefined,
+      goodie_price: undefined,
+    });
     params.setOpenForm(false);
   };
 
@@ -120,10 +125,6 @@ export default function GoodieForm(params: IGoodieForm) {
       });
       setImageUrl(params.goodie.goodie_pic);
     }
-    return () => {
-      setFormValues(defaultState);
-      setImageUrl(undefined);
-    };
   }, [params.goodie]);
 
   return (

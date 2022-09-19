@@ -43,8 +43,15 @@ export default function PartnerForm(params: IPartnerForm) {
     React.useState(defaultSnackbarState);
 
   const handleCloseForm = () => {
-    setFormValues(defaultState);
-    setImageUrl(undefined);
+    params.setInfo!({
+      partner_id: undefined,
+      partner_name: undefined,
+      partner_short_description: undefined,
+      partner_pic: undefined,
+      partner_description: undefined,
+      partner_mail: undefined,
+      partner_website: undefined,
+    });
     params.setOpenForm(false);
   };
 
@@ -112,6 +119,7 @@ export default function PartnerForm(params: IPartnerForm) {
   };
 
   React.useEffect(() => {
+    console.log(params.partner.partner_id);
     if (params.partner.partner_id) {
       setFormValues({
         ...formValues,
@@ -125,11 +133,6 @@ export default function PartnerForm(params: IPartnerForm) {
       });
       setImageUrl(params.partner.partner_pic);
     }
-
-    return () => {
-      setFormValues(defaultState);
-      setImageUrl(undefined);
-    };
   }, [params.partner]);
 
   return (

@@ -79,6 +79,7 @@ export default function AdminEventTiles() {
         open={openForm}
         setOpenForm={setOpenForm}
         event={chosenEvent}
+        setInfo={setChosenEvent}
       ></EventForm>
     </Container>
   );

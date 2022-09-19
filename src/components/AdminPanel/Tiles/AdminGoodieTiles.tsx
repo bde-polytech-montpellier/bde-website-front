@@ -69,6 +69,7 @@ export default function AdminGoodieTiles() {
         open={openForm}
         setOpenForm={setOpenForm}
         goodie={chosenGoodie}
+        setInfo={setChosenGoodie}
       />
     </Container>
   );

@@ -71,6 +71,7 @@ export default function AdminPartnersTiles() {
         open={openForm}
         setOpenForm={setOpenForm}
         partner={chosenPartner}
+        setInfo={setChosenPartner}
       ></PartnerForm>
     </Container>
   );

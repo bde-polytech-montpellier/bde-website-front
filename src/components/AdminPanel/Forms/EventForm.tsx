@@ -54,8 +54,21 @@ export default function EventForm(params: IEventForm) {
     React.useState(defaultSnackbarState);
 
   const handleCloseForm = () => {
-    setFormValues(defaultState);
-    setImageUrl(undefined);
+    params.setInfo!({
+      event_id: undefined,
+      event_name: undefined,
+      event_short_description: undefined,
+      event_pic: undefined,
+      event_description: undefined,
+      event_date: undefined,
+      event_time: undefined,
+      event_place: undefined,
+      event_datetime: undefined,
+      event_price: undefined,
+      event_price_follower: undefined,
+      event_club_id: undefined,
+      club_name: undefined,
+    });
     params.setOpenForm(false);
   };
 
@@ -164,10 +177,6 @@ export default function EventForm(params: IEventForm) {
       });
       setImageUrl(params.event.event_pic);
     }
-    return () => {
-      setFormValues(defaultState);
-      setImageUrl(undefined);
-    };
   }, [params.event]);
 
   return (

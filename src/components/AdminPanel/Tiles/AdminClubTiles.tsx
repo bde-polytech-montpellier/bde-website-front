@@ -67,7 +67,12 @@ export default function AdminClubTiles() {
           />
         ))}
       </Grid>
-      <ClubForm open={openForm} setOpenForm={setOpenForm} club={chosenClub} />
+      <ClubForm
+        open={openForm}
+        setOpenForm={setOpenForm}
+        club={chosenClub}
+        setInfo={setChosenClub}
+      />
     </Container>
   );
 }
