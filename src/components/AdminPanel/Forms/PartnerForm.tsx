@@ -23,9 +23,19 @@ import axios from "axios";
 import { getPartner } from "../../../routes/partners-api";
 import { partners } from "../../../routes/roots";
 import { IPartnerForm } from "../../../models/tiles";
+import { IPartnerFormData } from "../../../models/forms";
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
+const defaultState: IPartnerFormData = {
+  name: "",
+  pic: undefined,
+  imgChanged: false,
+  short_description: "",
+  description: "",
+  mail: "",
+  website: "",
+};
 
 export default function PartnerForm(params: IPartnerForm) {
   const [imageUrl, setImageUrl] = React.useState<string | undefined>(undefined);
@@ -33,22 +43,17 @@ export default function PartnerForm(params: IPartnerForm) {
     React.useState(defaultSnackbarState);
 
   const handleCloseForm = () => {
-    params.setOpenForm!(false);
+    setFormValues(defaultState);
+    setImageUrl(undefined);
+    params.setOpenForm(false);
   };
 
   const handleSnackbarClose = () => {
     setSnackbarState(defaultSnackbarState);
   };
 
-  const [formValues, setFormValues] = React.useState({
-    name: params.partner.partner_name ?? "",
-    pic: new File([""], ""),
-    imgChanged: false,
-    short_description: params.partner.partner_short_description ?? "",
-    description: params.partner.partner_description ?? "",
-    mail: params.partner.partner_mail ?? "",
-    website: params.partner.partner_website ?? "",
-  });
+  const [formValues, setFormValues] =
+    React.useState<IPartnerFormData>(defaultState);
 
   const sendFormData = (event: React.FormEvent) => {
     event.preventDefault();
@@ -62,7 +67,9 @@ export default function PartnerForm(params: IPartnerForm) {
     }
     let formData = new FormData();
     for (const [key, value] of Object.entries(formValues)) {
-      formData.set(key, value.toString());
+      if (typeof value === "boolean" || typeof value === "number")
+        formData.set(key, value.toString());
+      else formData.set(key, value);
     }
 
     (params.partner.partner_id
@@ -103,6 +110,27 @@ export default function PartnerForm(params: IPartnerForm) {
       [name]: value,
     });
   };
+
+  React.useEffect(() => {
+    if (params.partner.partner_id) {
+      setFormValues({
+        ...formValues,
+        name: params.partner.partner_name ?? "",
+        pic: undefined,
+        imgChanged: false,
+        short_description: params.partner.partner_short_description ?? "",
+        description: params.partner.partner_description ?? "",
+        mail: params.partner.partner_mail ?? "",
+        website: params.partner.partner_website ?? "",
+      });
+      setImageUrl(params.partner.partner_pic);
+    }
+
+    return () => {
+      setFormValues(defaultState);
+      setImageUrl(undefined);
+    };
+  }, [params.partner]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -157,6 +185,7 @@ export default function PartnerForm(params: IPartnerForm) {
                   onChange={handleInputChange}
                   style={{ width: "100%" }}
                   multiline
+                  rows={6}
                 />
               </Grid>
               <Grid item xs={6}>

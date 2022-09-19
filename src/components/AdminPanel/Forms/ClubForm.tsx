@@ -23,16 +23,30 @@ import axios from "axios";
 import { getClub } from "../../../routes/clubs-api";
 import { clubs } from "../../../routes/roots";
 import { IClubForm } from "../../../models/tiles";
+import { IClubFormData } from "../../../models/forms";
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
+const defaultState: IClubFormData = {
+  name: "",
+  pic: new File([""], ""),
+  imgChanged: false,
+  short_description: "",
+  description: "",
+  fb: "",
+  ig: "",
+};
 
 export default function ClubForm(params: IClubForm) {
-  const [imageUrl, setImageUrl] = React.useState<string | undefined>(undefined);
+  const [imageUrl, setImageUrl] = React.useState<string | undefined>(
+    params.club.club_pic,
+  );
   const [snackbarState, setSnackbarState] =
     React.useState(defaultSnackbarState);
 
   const handleCloseForm = () => {
+    setFormValues(defaultState);
+    setImageUrl(undefined);
     params.setOpenForm(false);
   };
 
@@ -40,15 +54,8 @@ export default function ClubForm(params: IClubForm) {
     setSnackbarState(defaultSnackbarState);
   };
 
-  const [formValues, setFormValues] = React.useState({
-    name: params.club.club_name ?? "",
-    pic: new File([""], ""),
-    imgChanged: false,
-    short_description: params.club.club_short_description ?? "",
-    description: params.club.club_description ?? "",
-    fb: params.club.club_fb ?? "",
-    ig: params.club.club_ig ?? "",
-  });
+  const [formValues, setFormValues] =
+    React.useState<IClubFormData>(defaultState);
 
   const sendFormData = (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,7 +69,8 @@ export default function ClubForm(params: IClubForm) {
     }
     let formData = new FormData();
     for (const [key, value] of Object.entries(formValues)) {
-      formData.set(key, value.toString());
+      if (typeof value === "boolean") formData.set(key, value.toString());
+      else formData.set(key, value);
     }
 
     (params.club.club_id
@@ -103,6 +111,25 @@ export default function ClubForm(params: IClubForm) {
       [name]: value,
     });
   };
+
+  React.useEffect(() => {
+    if (params.club.club_id) {
+      setFormValues({
+        ...formValues,
+        name: params.club.club_name ?? "",
+        short_description: params.club.club_short_description ?? "",
+        pic: undefined,
+        description: params.club.club_description ?? "",
+        fb: params.club.club_fb ?? "",
+        ig: params.club.club_ig ?? "",
+      });
+      setImageUrl(params.club.club_pic);
+    }
+    return () => {
+      setFormValues(defaultState);
+      setImageUrl(undefined);
+    };
+  }, [params.club]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -155,6 +182,7 @@ export default function ClubForm(params: IClubForm) {
                   onChange={handleInputChange}
                   style={{ width: "100%" }}
                   multiline
+                  rows={6}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>

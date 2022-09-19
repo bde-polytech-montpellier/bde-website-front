@@ -26,9 +26,26 @@ import { getEvent } from "../../../routes/events-api";
 import { events, clubs } from "../../../routes/roots";
 import { dateParserForInputs } from "../../../utils/dateParser";
 import { IClub, IEventForm } from "../../../models/tiles";
+import { IEventFormData } from "../../../models/forms";
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
+
+const defaultState: IEventFormData = {
+  name: "",
+  short_description: "",
+  imgChanged: false,
+  pic: undefined,
+  description: "",
+  date: "",
+  time: "",
+  place: "",
+  datetime: "",
+  price: undefined,
+  follower_price: undefined,
+  club_id: "",
+  club_name: "",
+};
 
 export default function EventForm(params: IEventForm) {
   const [imageUrl, setImageUrl] = React.useState<string | undefined>(undefined);
@@ -37,6 +54,8 @@ export default function EventForm(params: IEventForm) {
     React.useState(defaultSnackbarState);
 
   const handleCloseForm = () => {
+    setFormValues(defaultState);
+    setImageUrl(undefined);
     params.setOpenForm(false);
   };
 
@@ -44,22 +63,8 @@ export default function EventForm(params: IEventForm) {
     setSnackbarState(defaultSnackbarState);
   };
 
-  const defaultValues = {
-    name: params.event.event_name ?? "",
-    pic: new File([""], ""),
-    imgChanged: false,
-    short_description: params.event.event_short_description ?? "",
-    description: params.event.event_description ?? "",
-    date: dateParserForInputs(params.event.event_date) ?? "",
-    time: params.event.event_time ?? "",
-    place: params.event.event_place ?? "",
-    datetime: params.event.event_datetime ?? "",
-    price: params.event.event_price ?? "",
-    follower_price: params.event.event_follower_price ?? "",
-    club_id: params.event.event_club_id ?? "",
-    club_name: params.event.club_name ?? "",
-  };
-  const [formValues, setFormValues] = React.useState(defaultValues);
+  const [formValues, setFormValues] =
+    React.useState<IEventFormData>(defaultState);
 
   const sendFormData = (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,7 +78,9 @@ export default function EventForm(params: IEventForm) {
     }
     let formData = new FormData();
     for (const [key, value] of Object.entries(formValues)) {
-      formData.set(key, value.toString());
+      if (typeof value === "boolean" || typeof value === "number")
+        formData.set(key, value.toString());
+      else formData.set(key, value);
     }
 
     (params.event.event_id
@@ -137,6 +144,32 @@ export default function EventForm(params: IEventForm) {
     });
   }, []);
 
+  React.useEffect(() => {
+    if (params.event.event_id) {
+      setFormValues({
+        ...formValues,
+        name: params.event.event_name ?? "",
+        pic: undefined,
+        imgChanged: false,
+        short_description: params.event.event_short_description ?? "",
+        description: params.event.event_description ?? "",
+        date: dateParserForInputs(params.event.event_date),
+        time: params.event.event_time ?? "",
+        place: params.event.event_place ?? "",
+        datetime: params.event.event_datetime ?? "",
+        price: params.event.event_price,
+        follower_price: params.event.event_price_follower,
+        club_id: params.event.event_club_id ?? "",
+        club_name: params.event.club_name ?? "",
+      });
+      setImageUrl(params.event.event_pic);
+    }
+    return () => {
+      setFormValues(defaultState);
+      setImageUrl(undefined);
+    };
+  }, [params.event]);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -171,7 +204,6 @@ export default function EventForm(params: IEventForm) {
               <Autocomplete
                 disablePortal
                 id="club_id"
-                // name="club_id"
                 options={Array.from(clubsList.keys())}
                 sx={{ width: "auto", minWidth: "200px", ml: 2 }}
                 renderInput={(params) => (
@@ -192,6 +224,7 @@ export default function EventForm(params: IEventForm) {
                 fullWidth
                 required
                 multiline
+                rows={6}
               />
               <Stack>
                 <TextField
@@ -200,7 +233,7 @@ export default function EventForm(params: IEventForm) {
                   variant="standard"
                   type="number"
                   inputProps={{ min: 0 }}
-                  value={formValues.price}
+                  value={formValues.price ?? ""}
                   onChange={handleInputChange}
                   sx={{ mt: 1, ml: 4 }}
                   InputProps={{
@@ -215,7 +248,7 @@ export default function EventForm(params: IEventForm) {
                   variant="standard"
                   type="number"
                   inputProps={{ min: 0 }}
-                  value={formValues.follower_price}
+                  value={formValues.follower_price ?? ""}
                   onChange={handleInputChange}
                   sx={{ mt: 1, ml: 4 }}
                   InputProps={{

@@ -24,7 +24,7 @@ export default function AdminEventTiles() {
     event_place: undefined,
     event_datetime: undefined,
     event_price: undefined,
-    event_follower_price: undefined,
+    event_price_follower: undefined,
     event_club_id: undefined,
     club_name: undefined,
   });

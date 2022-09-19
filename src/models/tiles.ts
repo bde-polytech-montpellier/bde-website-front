@@ -23,7 +23,7 @@ export interface IEvent extends IDbInfo {
   event_place?: string;
   event_datetime?: string;
   event_price?: number;
-  event_follower_price?: number;
+  event_price_follower?: number;
   event_club_id?: string;
   club_name?: string;
 }

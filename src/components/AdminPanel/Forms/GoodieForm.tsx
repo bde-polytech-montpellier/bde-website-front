@@ -22,31 +22,36 @@ import axios from "axios";
 import { getGoodie } from "../../../routes/goodies-api";
 import { goodies } from "../../../routes/roots";
 import { IGoodieForm } from "../../../models/tiles";
+import { IGoodieFormData } from "../../../models/forms";
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
+const defaultState: IGoodieFormData = {
+  name: "",
+  pic: undefined,
+  imgChanged: false,
+  description: "",
+  price: undefined,
+};
 
 export default function GoodieForm(params: IGoodieForm) {
-  const [imageUrl, setImageUrl] = React.useState<string | undefined>(undefined);
+  const [imageUrl, setImageUrl] = React.useState<string | undefined>(
+    params.goodie.goodie_pic,
+  );
   const [snackbarState, setSnackbarState] =
     React.useState(defaultSnackbarState);
+  const [formValues, setFormValues] =
+    React.useState<IGoodieFormData>(defaultState);
 
   const handleCloseForm = () => {
+    setFormValues(defaultState);
+    setImageUrl(undefined);
     params.setOpenForm(false);
   };
 
   const handleSnackbarClose = () => {
     setSnackbarState(defaultSnackbarState);
   };
-
-  const defaultValues = {
-    name: params.goodie.goodie_name ?? "",
-    pic: new File([""], ""),
-    imgChanged: false,
-    description: params.goodie.goodie_description ?? "",
-    price: params.goodie.goodie_price ?? "",
-  };
-  const [formValues, setFormValues] = React.useState(defaultValues);
 
   const sendFormData = (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,7 +65,9 @@ export default function GoodieForm(params: IGoodieForm) {
     }
     let formData = new FormData();
     for (const [key, value] of Object.entries(formValues)) {
-      formData.set(key, value.toString());
+      if (typeof value === "boolean" || typeof value === "number")
+        formData.set(key, value.toString());
+      else formData.set(key, value);
     }
     (params.goodie.goodie_id
       ? axios.put(getGoodie(params.goodie.goodie_id), formData)
@@ -101,6 +108,24 @@ export default function GoodieForm(params: IGoodieForm) {
     });
   };
 
+  React.useEffect(() => {
+    if (params.goodie.goodie_id) {
+      setFormValues({
+        ...formValues,
+        name: params.goodie.goodie_name ?? "",
+        pic: undefined,
+        imgChanged: false,
+        description: params.goodie.goodie_description ?? "",
+        price: params.goodie.goodie_price,
+      });
+      setImageUrl(params.goodie.goodie_pic);
+    }
+    return () => {
+      setFormValues(defaultState);
+      setImageUrl(undefined);
+    };
+  }, [params.goodie]);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -136,7 +161,7 @@ export default function GoodieForm(params: IGoodieForm) {
               name="price"
               label="Prix"
               variant="standard"
-              value={formValues.price}
+              value={formValues.price ?? ""}
               onChange={handleInputChange}
               sx={{ mt: 1 }}
             />
@@ -150,6 +175,7 @@ export default function GoodieForm(params: IGoodieForm) {
                   onChange={handleInputChange}
                   style={{ width: "100%" }}
                   multiline
+                  rows={6}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>

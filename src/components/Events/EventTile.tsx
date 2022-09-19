@@ -45,7 +45,7 @@ export default function EventTile(params: IEventTile) {
     event_datetime: params.event.event_datetime ?? "Date non défnie",
     event_place: params.event.event_place,
     event_price: params.event.event_price,
-    event_follower_price: params.event.event_follower_price,
+    event_price_follower: params.event.event_price_follower,
     event_club_id: params.event.event_club_id,
     club_name: params.event.club_name,
   });
@@ -75,7 +75,7 @@ export default function EventTile(params: IEventTile) {
 
   const buildBody = () => (
     <div>
-      {displayPrice(event.event_price, event.event_follower_price)}
+      {displayPrice(event.event_price, event.event_price_follower)}
       <Typography>{event.event_short_description}</Typography>
     </div>
   );
