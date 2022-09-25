@@ -3,7 +3,7 @@ import axios from "axios";
 import { goodies } from "../../routes/roots";
 import * as React from "react";
 import GoodieTile from "./GoodieTile";
-import { IGoodie } from "../../models/tiles";
+import { IGoodie } from "../../models/goodie";
 import CardContainer from "../templates/CardContainer";
 
 export default function Goodies() {

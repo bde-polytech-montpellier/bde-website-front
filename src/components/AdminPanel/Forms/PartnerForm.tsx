@@ -22,8 +22,7 @@ import { AlternateEmail, Web } from "@mui/icons-material";
 import axios from "axios";
 import { getPartner } from "../../../routes/partners-api";
 import { partners } from "../../../routes/roots";
-import { IPartnerForm } from "../../../models/tiles";
-import { IPartnerFormData } from "../../../models/forms";
+import { IPartnerForm, IPartnerFormData } from "../../../models/partner";
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
@@ -122,7 +121,7 @@ export default function PartnerForm(params: IPartnerForm) {
 
   React.useEffect(() => {
     if (params.partner.partner_id) {
-      setFormValues({
+      setFormValues((formValues) => ({
         ...formValues,
         name: params.partner.partner_name ?? "",
         pic: undefined,
@@ -131,7 +130,7 @@ export default function PartnerForm(params: IPartnerForm) {
         description: params.partner.partner_description ?? "",
         mail: params.partner.partner_mail ?? "",
         website: params.partner.partner_website ?? "",
-      });
+      }));
       setImageUrl(params.partner.partner_pic);
     }
   }, [params.partner]);

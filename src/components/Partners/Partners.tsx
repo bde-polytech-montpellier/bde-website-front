@@ -3,7 +3,7 @@ import axios from "axios";
 import { partners } from "../../routes/roots";
 import * as React from "react";
 import Tile from "./PartnerTile";
-import { IPartner } from "../../models/tiles";
+import { IPartner } from "../../models/partner";
 import CardContainer from "../templates/CardContainer";
 
 export default function Parts() {

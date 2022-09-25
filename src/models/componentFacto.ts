@@ -1,4 +1,4 @@
-import { IDbInfo } from "./tiles";
+import { IDbInfo } from "./index";
 
 export interface ITileActions {
   api?: string;

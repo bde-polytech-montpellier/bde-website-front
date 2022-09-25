@@ -4,7 +4,7 @@ import { CalendarMonth, AccessTime, Place } from "@mui/icons-material";
 import { getEvent } from "../../routes/events-api";
 import { red } from "@mui/material/colors";
 import { dateParser } from "../../utils/dateParser";
-import { IEventTile, IEvent } from "../../models/tiles";
+import { IEventTile, IEvent } from "../../models/event";
 import Card from "../templates/Card";
 
 function displayPrice(price?: number, followerPrice?: number) {

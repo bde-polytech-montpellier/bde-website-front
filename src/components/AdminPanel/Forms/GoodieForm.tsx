@@ -21,8 +21,7 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import { getGoodie } from "../../../routes/goodies-api";
 import { goodies } from "../../../routes/roots";
-import { IGoodieForm } from "../../../models/tiles";
-import { IGoodieFormData } from "../../../models/forms";
+import { IGoodieForm, IGoodieFormData } from "../../../models/goodie";
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
@@ -117,14 +116,14 @@ export default function GoodieForm(params: IGoodieForm) {
 
   React.useEffect(() => {
     if (params.goodie.goodie_id) {
-      setFormValues({
+      setFormValues((formValues) => ({
         ...formValues,
         name: params.goodie.goodie_name ?? "",
         pic: undefined,
         imgChanged: false,
         description: params.goodie.goodie_description ?? "",
         price: params.goodie.goodie_price,
-      });
+      }));
       setImageUrl(params.goodie.goodie_pic);
     }
   }, [params.goodie]);

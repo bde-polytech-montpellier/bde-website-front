@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Typography } from "@mui/material";
 import { getGoodie } from "../../routes/goodies-api";
-import { IGoodieTile, IGoodie } from "../../models/tiles";
+import { IGoodieTile, IGoodie } from "../../models/goodie";
 import Card from "../templates/Card";
 
 const goodiePrice = (price?: number) => {

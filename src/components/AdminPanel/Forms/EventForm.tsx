@@ -25,8 +25,8 @@ import axios from "axios";
 import { getEvent } from "../../../routes/events-api";
 import { events, clubs } from "../../../routes/roots";
 import { dateParserForInputs } from "../../../utils/dateParser";
-import { IClub, IEventForm } from "../../../models/tiles";
-import { IEventFormData } from "../../../models/forms";
+import { IEventForm, IEventFormData } from "../../../models/event";
+import { IClub } from "../../../models/club";
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
@@ -161,7 +161,7 @@ export default function EventForm(params: IEventForm) {
 
   React.useEffect(() => {
     if (params.event.event_id) {
-      setFormValues({
+      setFormValues((formValues) => ({
         ...formValues,
         name: params.event.event_name ?? "",
         pic: undefined,
@@ -176,7 +176,7 @@ export default function EventForm(params: IEventForm) {
         follower_price: params.event.event_price_follower,
         club_id: params.event.event_club_id ?? "",
         club_name: params.event.club_name ?? "",
-      });
+      }));
       setImageUrl(params.event.event_pic);
     }
   }, [params.event]);

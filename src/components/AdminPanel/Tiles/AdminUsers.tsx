@@ -28,7 +28,8 @@ import { styled } from "@mui/material/styles";
 import axios from "axios";
 import { Search } from "@mui/icons-material";
 import { updateUserPermission } from "../../../routes/users-api";
-import { Role, User } from "../../../models/tiles";
+import { IUser } from "../../../models/user";
+import { IRole } from "../../../models/role";
 
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
 

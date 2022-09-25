@@ -6,8 +6,8 @@ import Container from "@mui/material/Container";
 import Tile from "../../Partners/PartnerTile";
 import TileActions from "../TileActions";
 import { Box, Button, Typography } from "@mui/material";
-import { IPartner } from "../../../models/tiles";
-const PartnerForm = React.lazy(() => import("../Forms/PartnerForm"));
+import { IPartner } from "../../../models/partner";
+import PartnerForm from "../Forms/PartnerForm";
 
 export default function AdminPartnersTiles() {
   const [openForm, setOpenForm] = React.useState<boolean>(false);

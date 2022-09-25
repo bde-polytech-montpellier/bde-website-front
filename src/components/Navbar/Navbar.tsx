@@ -21,7 +21,7 @@ import logobde from "../../static/logo.webp";
 import { styled, alpha } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
 import "../../style/Nav.css";
-import { NavbarParams } from "../../models/index";
+import { NavbarParams } from "../../models/user";
 
 export default function ResponsiveAppBar(params: NavbarParams) {
   const navigate = useNavigate();
