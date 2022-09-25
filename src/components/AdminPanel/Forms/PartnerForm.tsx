@@ -22,11 +22,14 @@ import { AlternateEmail, Web } from "@mui/icons-material";
 import axios from "axios";
 import { getPartner } from "../../../routes/partners-api";
 import { partners } from "../../../routes/roots";
-import { IPartnerForm, IPartnerFormData } from "../../../models/partner";
+import {
+  PartnerFormAction,
+  CreateUpdatePartnerRequest,
+} from "../../../models/partner";
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
-const defaultState: IPartnerFormData = {
+const defaultState: CreateUpdatePartnerRequest = {
   name: "",
   pic: undefined,
   imgChanged: false,
@@ -36,7 +39,7 @@ const defaultState: IPartnerFormData = {
   website: "",
 };
 
-export default function PartnerForm(params: IPartnerForm) {
+export default function PartnerForm(params: PartnerFormAction) {
   const [imageUrl, setImageUrl] = React.useState<string | undefined>(undefined);
   const [snackbarState, setSnackbarState] =
     React.useState(defaultSnackbarState);
@@ -61,7 +64,7 @@ export default function PartnerForm(params: IPartnerForm) {
   };
 
   const [formValues, setFormValues] =
-    React.useState<IPartnerFormData>(defaultState);
+    React.useState<CreateUpdatePartnerRequest>(defaultState);
 
   const sendFormData = (event: React.FormEvent) => {
     event.preventDefault();

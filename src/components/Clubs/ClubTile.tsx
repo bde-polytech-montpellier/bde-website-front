@@ -2,11 +2,11 @@ import * as React from "react";
 import { Typography, Stack, IconButton } from "@mui/material";
 import { Facebook, Instagram } from "@mui/icons-material";
 import { getClub } from "../../routes/clubs-api";
-import { IClubTile, IClub } from "../../models/club";
+import { ClubTileActions, ClubResponse } from "../../models/club";
 import Card from "../templates/Card";
 
-export default function ClubTile(params: IClubTile) {
-  const [club, setClub] = React.useState<IClub>({
+export default function ClubTile(params: ClubTileActions) {
+  const [club, setClub] = React.useState<ClubResponse>({
     club_id: params.club.club_id,
     club_name: params.club.club_name,
     club_pic: params.club.club_pic,

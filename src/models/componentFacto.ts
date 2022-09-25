@@ -1,13 +1,13 @@
-import { IDbInfo } from "./index";
+import { DbInfo } from "./index";
 
-export interface ITileActions {
+export interface TileActions {
   api?: string;
-  entity?: IDbInfo;
+  entity?: DbInfo;
   openForm?: Function;
-  setInfo?: React.Dispatch<React.SetStateAction<IDbInfo>>;
+  setInfo?: React.Dispatch<React.SetStateAction<DbInfo>>;
 }
 
-export interface ICard {
+export interface CardArgs {
   id: string;
   img?: string;
   header?: React.FC;
@@ -18,7 +18,7 @@ export interface ICard {
   dialogBodyText: string;
 }
 
-export interface ICardContainer {
+export interface CardContainer {
   title: string;
   subtitle: string;
   cards: JSX.Element[];

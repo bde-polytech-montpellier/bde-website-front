@@ -8,12 +8,12 @@ import TileActions from "../TileActions";
 import { Box, Button, Typography } from "@mui/material";
 import { clubs } from "../../../routes/roots";
 import ClubForm from "../Forms/ClubForm";
-import { IClub } from "../../../models/club";
+import { ClubResponse } from "../../../models/club";
 
 export default function AdminClubTiles() {
   const [clubLists, setClubs] = useState([]);
   const [openForm, setOpenForm] = React.useState(false);
-  const [chosenClub, setChosenClub] = useState<IClub>({
+  const [chosenClub, setChosenClub] = useState<ClubResponse>({
     club_id: undefined,
     club_name: undefined,
     club_short_description: undefined,
@@ -57,7 +57,7 @@ export default function AdminClubTiles() {
         </Button>
       </Box>
       <Grid container spacing={4}>
-        {clubLists.map((club: IClub) => (
+        {clubLists.map((club: ClubResponse) => (
           <ClubTile
             key={club.club_id!}
             club={club}

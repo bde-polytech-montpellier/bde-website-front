@@ -7,13 +7,13 @@ import GoodieTile from "../../Goodies/GoodieTile";
 import TileActions from "../TileActions";
 import { Box, Button, Typography } from "@mui/material";
 import { goodies } from "../../../routes/roots";
-import { IGoodie } from "../../../models/goodie";
+import { GoodieResponse } from "../../../models/goodie";
 import GoodieForm from "../Forms/GoodieForm";
 
 export default function AdminGoodieTiles() {
   const [goodieLists, setGoodies] = useState([]);
   const [openForm, setOpenForm] = React.useState(false);
-  const [chosenGoodie, setChosenGoodie] = React.useState<IGoodie>({
+  const [chosenGoodie, setChosenGoodie] = React.useState<GoodieResponse>({
     goodie_id: undefined,
     goodie_name: undefined,
     goodie_description: undefined,
@@ -55,7 +55,7 @@ export default function AdminGoodieTiles() {
         </Button>
       </Box>
       <Grid container spacing={4}>
-        {goodieLists.map((goodie: IGoodie) => (
+        {goodieLists.map((goodie: GoodieResponse) => (
           <GoodieTile
             key={goodie.goodie_id}
             goodie={goodie}

@@ -22,11 +22,11 @@ import { Instagram, Facebook } from "@mui/icons-material";
 import axios from "axios";
 import { getClub } from "../../../routes/clubs-api";
 import { clubs } from "../../../routes/roots";
-import { IClubForm, IClubFormData } from "../../../models/club";
+import { ClubFormActions, CreateUpdateClubRequest } from "../../../models/club";
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
-const defaultState: IClubFormData = {
+const defaultState: CreateUpdateClubRequest = {
   name: "",
   pic: new File([""], ""),
   imgChanged: false,
@@ -36,7 +36,7 @@ const defaultState: IClubFormData = {
   ig: "",
 };
 
-export default function ClubForm(params: IClubForm) {
+export default function ClubForm(params: ClubFormActions) {
   const [imageUrl, setImageUrl] = React.useState<string | undefined>(
     params.club.club_pic,
   );
@@ -63,7 +63,7 @@ export default function ClubForm(params: IClubForm) {
   };
 
   const [formValues, setFormValues] =
-    React.useState<IClubFormData>(defaultState);
+    React.useState<CreateUpdateClubRequest>(defaultState);
 
   const sendFormData = (e: React.FormEvent) => {
     e.preventDefault();
