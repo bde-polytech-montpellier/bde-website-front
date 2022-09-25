@@ -6,13 +6,13 @@ import Container from "@mui/material/Container";
 import Tile from "../../Partners/PartnerTile";
 import TileActions from "../TileActions";
 import { Box, Button, Typography } from "@mui/material";
-import { IPartner } from "../../../models/tiles";
-const PartnerForm = React.lazy(() => import("../Forms/PartnerForm"));
+import { PartnerResponse } from "../../../models/partner";
+import PartnerForm from "../Forms/PartnerForm";
 
 export default function AdminPartnersTiles() {
   const [openForm, setOpenForm] = React.useState<boolean>(false);
-  const [partnerships, setParts] = React.useState<IPartner[]>([]);
-  const [chosenPartner, setChosenPartner] = React.useState<IPartner>({
+  const [partnerships, setParts] = React.useState<PartnerResponse[]>([]);
+  const [chosenPartner, setChosenPartner] = React.useState<PartnerResponse>({
     partner_id: "",
     partner_name: "",
     partner_short_description: "",
@@ -56,7 +56,7 @@ export default function AdminPartnersTiles() {
         </Button>
       </Box>
       <Grid container spacing={4}>
-        {partnerships.map((partner: IPartner) => (
+        {partnerships.map((partner: PartnerResponse) => (
           <Tile
             key={partner.partner_id!}
             partner={partner}

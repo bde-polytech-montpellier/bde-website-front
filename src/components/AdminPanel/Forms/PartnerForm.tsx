@@ -22,12 +22,26 @@ import { AlternateEmail, Web } from "@mui/icons-material";
 import axios from "axios";
 import { getPartner } from "../../../routes/partners-api";
 import { partners } from "../../../routes/roots";
-import { IPartnerForm } from "../../../models/tiles";
-import { IPartnerFormData } from "../../../models/forms";
+import { PartnerTileActions } from "../../../models/partner";
+
+interface PartnerFormAction extends PartnerTileActions {
+  open: boolean;
+  setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface CreateUpdatePartnerRequest {
+  name: string;
+  pic: File | undefined;
+  imgChanged: boolean;
+  short_description: string;
+  description: string;
+  mail: string;
+  website: string;
+}
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
-const defaultState: IPartnerFormData = {
+const defaultState: CreateUpdatePartnerRequest = {
   name: "",
   pic: undefined,
   imgChanged: false,
@@ -37,7 +51,7 @@ const defaultState: IPartnerFormData = {
   website: "",
 };
 
-export default function PartnerForm(params: IPartnerForm) {
+export default function PartnerForm(params: PartnerFormAction) {
   const [imageUrl, setImageUrl] = React.useState<string | undefined>(undefined);
   const [snackbarState, setSnackbarState] =
     React.useState(defaultSnackbarState);
@@ -62,7 +76,7 @@ export default function PartnerForm(params: IPartnerForm) {
   };
 
   const [formValues, setFormValues] =
-    React.useState<IPartnerFormData>(defaultState);
+    React.useState<CreateUpdatePartnerRequest>(defaultState);
 
   const sendFormData = (event: React.FormEvent) => {
     event.preventDefault();
@@ -122,7 +136,7 @@ export default function PartnerForm(params: IPartnerForm) {
 
   React.useEffect(() => {
     if (params.partner.partner_id) {
-      setFormValues({
+      setFormValues((formValues) => ({
         ...formValues,
         name: params.partner.partner_name ?? "",
         pic: undefined,
@@ -131,7 +145,7 @@ export default function PartnerForm(params: IPartnerForm) {
         description: params.partner.partner_description ?? "",
         mail: params.partner.partner_mail ?? "",
         website: params.partner.partner_website ?? "",
-      });
+      }));
       setImageUrl(params.partner.partner_pic);
     }
   }, [params.partner]);

@@ -8,12 +8,12 @@ import axios from "axios";
 import { events } from "../../../routes/roots";
 import { Box, Button, Typography } from "@mui/material";
 import EventForm from "../Forms/EventForm";
-import { IEvent } from "../../../models/tiles";
+import { EventResponse } from "../../../models/event";
 
 export default function AdminEventTiles() {
   const [eventList, setEvents] = useState([]);
   const [openForm, setOpenForm] = React.useState(false);
-  const [chosenEvent, setChosenEvent] = React.useState<IEvent>({
+  const [chosenEvent, setChosenEvent] = React.useState<EventResponse>({
     event_id: undefined,
     event_name: undefined,
     event_short_description: undefined,
@@ -65,7 +65,7 @@ export default function AdminEventTiles() {
         </Button>
       </Box>
       <Grid container spacing={4}>
-        {eventList.map((event: IEvent) => (
+        {eventList.map((event: EventResponse) => (
           <EventTile
             key={event.event_id}
             event={event}

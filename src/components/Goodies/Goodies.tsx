@@ -3,7 +3,7 @@ import axios from "axios";
 import { goodies } from "../../routes/roots";
 import * as React from "react";
 import GoodieTile from "./GoodieTile";
-import { IGoodie } from "../../models/tiles";
+import { GoodieResponse } from "../../models/goodie";
 import CardContainer from "../templates/CardContainer";
 
 export default function Goodies() {
@@ -23,7 +23,7 @@ export default function Goodies() {
     <CardContainer
       title="Les Goodies"
       subtitle="De petits souvenirs de ton séjour parmi nous !"
-      cards={goodieList.map((goodie: IGoodie) => (
+      cards={goodieList.map((goodie: GoodieResponse) => (
         <GoodieTile key={goodie.goodie_id} goodie={goodie} />
       ))}
     />

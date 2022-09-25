@@ -4,7 +4,7 @@ import { CalendarMonth, AccessTime, Place } from "@mui/icons-material";
 import { getEvent } from "../../routes/events-api";
 import { red } from "@mui/material/colors";
 import { dateParser } from "../../utils/dateParser";
-import { IEventTile, IEvent } from "../../models/tiles";
+import { EventTileActions, EventResponse } from "../../models/event";
 import Card from "../templates/Card";
 
 function displayPrice(price?: number, followerPrice?: number) {
@@ -33,8 +33,8 @@ function displayPrice(price?: number, followerPrice?: number) {
   );
 }
 
-export default function EventTile(params: IEventTile) {
-  const [event, setEvent] = React.useState<IEvent>({
+export default function EventTile(params: EventTileActions) {
+  const [event, setEvent] = React.useState<EventResponse>({
     event_id: params.event.event_id,
     event_name: params.event.event_name,
     event_pic: params.event.event_pic,

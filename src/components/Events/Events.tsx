@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import EventTile from "./EventTile";
 import { events } from "../../routes/roots";
 import axios from "axios";
-import { IEvent } from "../../models/tiles";
+import { EventResponse } from "../../models/event";
 import CardContainer from "../templates/CardContainer";
 
 export default function Events() {
@@ -22,7 +22,7 @@ export default function Events() {
     <CardContainer
       title="Les Events"
       subtitle="De quoi t'occuper !"
-      cards={eventList.map((event: IEvent) => (
+      cards={eventList.map((event: EventResponse) => (
         <EventTile key={event.event_id} event={event} />
       ))}
     />

@@ -25,13 +25,34 @@ import axios from "axios";
 import { getEvent } from "../../../routes/events-api";
 import { events, clubs } from "../../../routes/roots";
 import { dateParserForInputs } from "../../../utils/dateParser";
-import { IClub, IEventForm } from "../../../models/tiles";
-import { IEventFormData } from "../../../models/forms";
+import { ClubResponse } from "../../../models/club";
+import { EventTileActions } from "../../../models/event";
+
+interface EventFormActions extends EventTileActions {
+  open: boolean;
+  setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface CreateUpdateEventRequest {
+  name: string;
+  short_description: string;
+  imgChanged: boolean;
+  pic: File | undefined;
+  description: string;
+  date: string;
+  time: string;
+  place: string;
+  datetime: string;
+  price: number | undefined;
+  follower_price: number | undefined;
+  club_id: string;
+  club_name: string;
+}
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
 
-const defaultState: IEventFormData = {
+const defaultState: CreateUpdateEventRequest = {
   name: "",
   short_description: "",
   imgChanged: false,
@@ -47,7 +68,7 @@ const defaultState: IEventFormData = {
   club_name: "",
 };
 
-export default function EventForm(params: IEventForm) {
+export default function EventForm(params: EventFormActions) {
   const [imageUrl, setImageUrl] = React.useState<string | undefined>(undefined);
   const [clubsList, setClubs] = React.useState<Map<string, string>>(new Map());
   const [snackbarState, setSnackbarState] =
@@ -79,7 +100,7 @@ export default function EventForm(params: IEventForm) {
   };
 
   const [formValues, setFormValues] =
-    React.useState<IEventFormData>(defaultState);
+    React.useState<CreateUpdateEventRequest>(defaultState);
 
   const sendFormData = (e: React.FormEvent) => {
     e.preventDefault();
@@ -151,7 +172,7 @@ export default function EventForm(params: IEventForm) {
   React.useEffect(() => {
     axios.get(clubs).then((response) => {
       const list = new Map<string, string>(
-        response.data.map((club: IClub) => {
+        response.data.map((club: ClubResponse) => {
           return [club.club_name, club.club_id];
         }),
       );
@@ -161,7 +182,7 @@ export default function EventForm(params: IEventForm) {
 
   React.useEffect(() => {
     if (params.event.event_id) {
-      setFormValues({
+      setFormValues((formValues) => ({
         ...formValues,
         name: params.event.event_name ?? "",
         pic: undefined,
@@ -176,7 +197,7 @@ export default function EventForm(params: IEventForm) {
         follower_price: params.event.event_price_follower,
         club_id: params.event.event_club_id ?? "",
         club_name: params.event.club_name ?? "",
-      });
+      }));
       setImageUrl(params.event.event_pic);
     }
   }, [params.event]);

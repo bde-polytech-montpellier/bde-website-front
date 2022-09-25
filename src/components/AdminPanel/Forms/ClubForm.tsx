@@ -22,12 +22,26 @@ import { Instagram, Facebook } from "@mui/icons-material";
 import axios from "axios";
 import { getClub } from "../../../routes/clubs-api";
 import { clubs } from "../../../routes/roots";
-import { IClubForm } from "../../../models/tiles";
-import { IClubFormData } from "../../../models/forms";
+import { ClubTileActions } from "../../../models/club";
+
+interface ClubFormActions extends ClubTileActions {
+  open: boolean;
+  setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface CreateUpdateClubRequest {
+  name: string;
+  pic: File | undefined;
+  imgChanged: boolean;
+  short_description: string;
+  description: string;
+  fb: string;
+  ig: string;
+}
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
-const defaultState: IClubFormData = {
+const defaultState: CreateUpdateClubRequest = {
   name: "",
   pic: new File([""], ""),
   imgChanged: false,
@@ -37,7 +51,7 @@ const defaultState: IClubFormData = {
   ig: "",
 };
 
-export default function ClubForm(params: IClubForm) {
+export default function ClubForm(params: ClubFormActions) {
   const [imageUrl, setImageUrl] = React.useState<string | undefined>(
     params.club.club_pic,
   );
@@ -64,7 +78,7 @@ export default function ClubForm(params: IClubForm) {
   };
 
   const [formValues, setFormValues] =
-    React.useState<IClubFormData>(defaultState);
+    React.useState<CreateUpdateClubRequest>(defaultState);
 
   const sendFormData = (e: React.FormEvent) => {
     e.preventDefault();
@@ -123,7 +137,7 @@ export default function ClubForm(params: IClubForm) {
 
   React.useEffect(() => {
     if (params.club.club_id) {
-      setFormValues({
+      setFormValues((formValues) => ({
         ...formValues,
         name: params.club.club_name ?? "",
         short_description: params.club.club_short_description ?? "",
@@ -131,7 +145,7 @@ export default function ClubForm(params: IClubForm) {
         description: params.club.club_description ?? "",
         fb: params.club.club_fb ?? "",
         ig: params.club.club_ig ?? "",
-      });
+      }));
       setImageUrl(params.club.club_pic);
     }
   }, [params.club]);

@@ -17,7 +17,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { signin } from "../../routes/roots";
 import portalImg from "../../static/signin.webp";
 import axios from "axios";
-import { SignInParams } from "../../models/index";
+import { SignInParams } from "../../models/user";
 
 function Copyright() {
   return (

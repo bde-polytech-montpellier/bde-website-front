@@ -18,7 +18,7 @@ import { signup } from "../../routes/roots";
 import { cookieToken } from "../../config";
 import { getUser } from "../../routes/users-api";
 import axios from "axios";
-import { SignupParams } from "../../models/index";
+import { SignupParams } from "../../models/user";
 
 const theme = createTheme();
 
