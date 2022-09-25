@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ICard } from "../../models/componentFacto";
+import { CardArgs } from "../../models/componentFacto";
 import {
   Button,
   Card,
@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import noImage from "../../static/no-image.webp";
 
-export default function Tile(comps: ICard) {
+export default function Tile(comps: CardArgs) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = async () => {

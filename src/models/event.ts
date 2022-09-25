@@ -1,6 +1,6 @@
-import { IDbInfo, ITileActionInfo } from "./index";
+import { DbInfo, TileActionsInfo } from "./index";
 
-export interface IEvent extends IDbInfo {
+export interface EventResponse extends DbInfo {
   event_id?: string;
   event_name?: string;
   event_short_description?: string;
@@ -16,17 +16,17 @@ export interface IEvent extends IDbInfo {
   club_name?: string;
 }
 
-export interface IEventTile extends ITileActionInfo {
-  event: IEvent;
-  setInfo?: React.Dispatch<React.SetStateAction<IEvent>>;
+export interface EventTileActions extends TileActionsInfo {
+  event: EventResponse;
+  setInfo?: React.Dispatch<React.SetStateAction<EventResponse>>;
 }
 
-export interface IEventForm extends IEventTile {
+export interface EventFormActions extends EventTileActions {
   open: boolean;
   setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export interface IEventFormData {
+export interface CreateUpdateEventRequest {
   name: string;
   short_description: string;
   imgChanged: boolean;

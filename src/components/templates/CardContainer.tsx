@@ -2,11 +2,11 @@ import * as React from "react";
 import { CssBaseline, Grid, Box, Typography, Container } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Footer from "../Footer";
-import { ICardContainer } from "../../models/componentFacto";
+import { CardContainer as CardContainerArgs } from "../../models/componentFacto";
 
 const theme = createTheme();
 
-export default function CardContainer(params: ICardContainer) {
+export default function CardContainer(params: CardContainerArgs) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

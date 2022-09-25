@@ -1,6 +1,6 @@
-import { IDbInfo, SnackbarState } from "./index";
+import { DbInfo, SnackbarState } from "./index";
 
-export interface IUser extends IDbInfo {
+export interface UserResponse extends DbInfo {
   polyuser_id?: string;
   polyuser_name?: string;
   polyuser_mail?: string;
@@ -8,7 +8,7 @@ export interface IUser extends IDbInfo {
   role_name?: string;
 }
 
-export interface User {
+export interface CookieUser {
   id?: string;
   name?: string;
   mail?: string;
@@ -17,21 +17,21 @@ export interface User {
 }
 
 export interface NavbarParams {
-  loggedUser: User;
-  setUser: React.Dispatch<React.SetStateAction<User>>;
+  loggedUser: CookieUser;
+  setUser: React.Dispatch<React.SetStateAction<CookieUser>>;
   removeCookie: (name: "token") => void;
   setSnackbarState: React.Dispatch<React.SetStateAction<SnackbarState>>;
 }
 
 export interface SignInParams {
   setSnackbarState: React.Dispatch<React.SetStateAction<SnackbarState>>;
-  setUser: React.Dispatch<React.SetStateAction<User>>;
+  setUser: React.Dispatch<React.SetStateAction<CookieUser>>;
   setCookie: (name: "token", value: any, options?: any) => void;
 }
 
 export interface SignupParams {
   setSnackbarState: React.Dispatch<React.SetStateAction<SnackbarState>>;
-  setUser: React.Dispatch<React.SetStateAction<User>>;
-  user: User;
+  setUser: React.Dispatch<React.SetStateAction<CookieUser>>;
+  user: CookieUser;
   removeCookie: (name: "token") => void;
 }

@@ -1,6 +1,6 @@
-import { IDbInfo, ITileActionInfo } from "./index";
+import { DbInfo, TileActionsInfo } from "./index";
 
-export interface IGoodie extends IDbInfo {
+export interface GoodieResponse extends DbInfo {
   goodie_id?: string;
   goodie_name?: string;
   goodie_description?: string;
@@ -8,17 +8,17 @@ export interface IGoodie extends IDbInfo {
   goodie_price?: number;
 }
 
-export interface IGoodieTile extends ITileActionInfo {
-  goodie: IGoodie;
-  setInfo?: React.Dispatch<React.SetStateAction<IGoodie>>;
+export interface GoodieTileActions extends TileActionsInfo {
+  goodie: GoodieResponse;
+  setInfo?: React.Dispatch<React.SetStateAction<GoodieResponse>>;
 }
 
-export interface IGoodieForm extends IGoodieTile {
+export interface GoodieFormActions extends GoodieTileActions {
   open: boolean;
   setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export interface IGoodieFormData {
+export interface CreateUpdateGoodieRequest {
   name: string;
   pic: File | undefined;
   imgChanged: boolean;

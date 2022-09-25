@@ -2,11 +2,11 @@ import * as React from "react";
 import { Typography, IconButton, Stack } from "@mui/material";
 import { AlternateEmail, Link } from "@mui/icons-material";
 import { getPartner } from "../../routes/partners-api";
-import { IPartnerTile, IPartner } from "../../models/partner";
+import { PartnerTileActions, PartnerResponse } from "../../models/partner";
 import Card from "../templates/Card";
 
-export default function PartnerTile(params: IPartnerTile) {
-  const [partner, setPartner] = React.useState<IPartner>({
+export default function PartnerTile(params: PartnerTileActions) {
+  const [partner, setPartner] = React.useState<PartnerResponse>({
     partner_id: params.partner.partner_id,
     partner_name: params.partner.partner_name,
     partner_pic: params.partner.partner_pic,

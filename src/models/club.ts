@@ -1,6 +1,6 @@
-import { IDbInfo, ITileActionInfo } from "./index";
+import { DbInfo, TileActionsInfo } from "./index";
 
-export interface IClub extends IDbInfo {
+export interface ClubResponse extends DbInfo {
   club_id?: string;
   club_name?: string;
   club_short_description?: string;
@@ -10,17 +10,17 @@ export interface IClub extends IDbInfo {
   club_ig?: string;
 }
 
-export interface IClubTile extends ITileActionInfo {
-  club: IClub;
-  setInfo?: React.Dispatch<React.SetStateAction<IClub>>;
+export interface ClubTileActions extends TileActionsInfo {
+  club: ClubResponse;
+  setInfo?: React.Dispatch<React.SetStateAction<ClubResponse>>;
 }
 
-export interface IClubForm extends IClubTile {
+export interface ClubFormActions extends ClubTileActions {
   open: boolean;
   setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export interface IClubFormData {
+export interface CreateUpdateClubRequest {
   name: string;
   pic: File | undefined;
   imgChanged: boolean;

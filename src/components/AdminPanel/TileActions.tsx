@@ -14,11 +14,11 @@ import {
 import { Edit, DeleteForever } from "@mui/icons-material";
 import axios from "axios";
 import theme from "../../colors/palette";
-import { ITileActions } from "../../models/componentFacto";
+import { TileActions as TileActionsArgs } from "../../models/componentFacto";
 
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
 
-export default function TileActions(params: ITileActions) {
+export default function TileActions(params: TileActionsArgs) {
   const [snackbarState, setSnackbarState] =
     React.useState(defaultSnackbarState);
   const [remove, setRemove] = React.useState(false);

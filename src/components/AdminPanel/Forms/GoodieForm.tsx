@@ -21,11 +21,14 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import { getGoodie } from "../../../routes/goodies-api";
 import { goodies } from "../../../routes/roots";
-import { IGoodieForm, IGoodieFormData } from "../../../models/goodie";
+import {
+  GoodieFormActions,
+  CreateUpdateGoodieRequest,
+} from "../../../models/goodie";
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
-const defaultState: IGoodieFormData = {
+const defaultState: CreateUpdateGoodieRequest = {
   name: "",
   pic: undefined,
   imgChanged: false,
@@ -33,14 +36,14 @@ const defaultState: IGoodieFormData = {
   price: undefined,
 };
 
-export default function GoodieForm(params: IGoodieForm) {
+export default function GoodieForm(params: GoodieFormActions) {
   const [imageUrl, setImageUrl] = React.useState<string | undefined>(
     params.goodie.goodie_pic,
   );
   const [snackbarState, setSnackbarState] =
     React.useState(defaultSnackbarState);
   const [formValues, setFormValues] =
-    React.useState<IGoodieFormData>(defaultState);
+    React.useState<CreateUpdateGoodieRequest>(defaultState);
 
   const handleCloseForm = () => {
     params.setInfo!({

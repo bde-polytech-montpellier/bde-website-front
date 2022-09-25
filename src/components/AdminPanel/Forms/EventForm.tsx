@@ -25,13 +25,16 @@ import axios from "axios";
 import { getEvent } from "../../../routes/events-api";
 import { events, clubs } from "../../../routes/roots";
 import { dateParserForInputs } from "../../../utils/dateParser";
-import { IEventForm, IEventFormData } from "../../../models/event";
-import { IClub } from "../../../models/club";
+import {
+  EventFormActions,
+  CreateUpdateEventRequest,
+} from "../../../models/event";
+import { ClubResponse } from "../../../models/club";
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
 
-const defaultState: IEventFormData = {
+const defaultState: CreateUpdateEventRequest = {
   name: "",
   short_description: "",
   imgChanged: false,
@@ -47,7 +50,7 @@ const defaultState: IEventFormData = {
   club_name: "",
 };
 
-export default function EventForm(params: IEventForm) {
+export default function EventForm(params: EventFormActions) {
   const [imageUrl, setImageUrl] = React.useState<string | undefined>(undefined);
   const [clubsList, setClubs] = React.useState<Map<string, string>>(new Map());
   const [snackbarState, setSnackbarState] =
@@ -79,7 +82,7 @@ export default function EventForm(params: IEventForm) {
   };
 
   const [formValues, setFormValues] =
-    React.useState<IEventFormData>(defaultState);
+    React.useState<CreateUpdateEventRequest>(defaultState);
 
   const sendFormData = (e: React.FormEvent) => {
     e.preventDefault();
@@ -151,7 +154,7 @@ export default function EventForm(params: IEventForm) {
   React.useEffect(() => {
     axios.get(clubs).then((response) => {
       const list = new Map<string, string>(
-        response.data.map((club: IClub) => {
+        response.data.map((club: ClubResponse) => {
           return [club.club_name, club.club_id];
         }),
       );

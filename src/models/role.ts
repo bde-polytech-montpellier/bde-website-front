@@ -1,6 +1,6 @@
-import { IDbInfo } from "./index";
+import { DbInfo } from "./index";
 
-export interface IRole extends IDbInfo {
+export interface RoleResponse extends DbInfo {
   role_id?: number;
   role_name?: string;
 }

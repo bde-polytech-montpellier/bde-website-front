@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Typography } from "@mui/material";
 import { getGoodie } from "../../routes/goodies-api";
-import { IGoodieTile, IGoodie } from "../../models/goodie";
+import { GoodieTileActions, GoodieResponse } from "../../models/goodie";
 import Card from "../templates/Card";
 
 const goodiePrice = (price?: number) => {
@@ -26,8 +26,8 @@ const goodiePrice = (price?: number) => {
   );
 };
 
-export default function GoodieTile(params: IGoodieTile) {
-  const [goodie, setGoodie] = React.useState<IGoodie>({
+export default function GoodieTile(params: GoodieTileActions) {
+  const [goodie, setGoodie] = React.useState<GoodieResponse>({
     goodie_id: params.goodie.goodie_id,
     goodie_name: params.goodie.goodie_name,
     goodie_pic: params.goodie.goodie_pic,

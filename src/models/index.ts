@@ -1,4 +1,4 @@
-import { ITileActions } from "./componentFacto";
+import { TileActions } from "./componentFacto";
 
 export interface SnackbarState {
   open: boolean;
@@ -11,14 +11,14 @@ export interface InputError {
   error: string;
 }
 
-export interface IDbInfo {}
+export interface DbInfo {}
 
-export interface IPrevTeam {
+export interface PrevTeam {
   name: string;
   img: string;
 }
 
-export interface ITileActionInfo {
-  TileActions?: React.FC<ITileActions>;
+export interface TileActionsInfo {
+  TileActions?: React.FC<TileActions>;
   setOpenForm?: React.Dispatch<React.SetStateAction<boolean>>;
 }
