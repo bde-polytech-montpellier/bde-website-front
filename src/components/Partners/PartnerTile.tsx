@@ -2,7 +2,7 @@ import * as React from "react";
 import { Typography, IconButton, Stack } from "@mui/material";
 import { AlternateEmail, Link } from "@mui/icons-material";
 import { getPartner } from "../../routes/partners-api";
-import { IPartnerTile, IPartner } from "../../models/tiles";
+import { IPartnerTile, IPartner } from "../../models/partner";
 import Card from "../templates/Card";
 
 export default function PartnerTile(params: IPartnerTile) {

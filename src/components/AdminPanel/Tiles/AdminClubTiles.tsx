@@ -8,7 +8,7 @@ import TileActions from "../TileActions";
 import { Box, Button, Typography } from "@mui/material";
 import { clubs } from "../../../routes/roots";
 import ClubForm from "../Forms/ClubForm";
-import { IClub } from "../../../models/tiles";
+import { IClub } from "../../../models/club";
 
 export default function AdminClubTiles() {
   const [clubLists, setClubs] = useState([]);

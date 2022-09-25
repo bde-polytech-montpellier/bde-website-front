@@ -21,16 +21,16 @@ import logobde from "../../static/logo.webp";
 import { styled, alpha } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
 import "../../style/Nav.css";
-import { NavbarParams } from "../../models/index";
+import { NavbarParams } from "../../models/user";
 
 export default function ResponsiveAppBar(params: NavbarParams) {
   const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState<Element | undefined>(
-    undefined
+    undefined,
   );
   const [anchorElUser, setAnchorElUser] = React.useState<Element | undefined>(
-    undefined
+    undefined,
   );
 
   const pages = [

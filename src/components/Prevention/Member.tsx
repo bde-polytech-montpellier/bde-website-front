@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
-import { IPrevTeam } from "../../models/tiles";
+import { IPrevTeam } from "../../models/index";
 
 export default function Member(member: IPrevTeam) {
   return (

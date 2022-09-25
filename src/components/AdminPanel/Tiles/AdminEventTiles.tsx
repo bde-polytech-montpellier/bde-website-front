@@ -8,7 +8,7 @@ import axios from "axios";
 import { events } from "../../../routes/roots";
 import { Box, Button, Typography } from "@mui/material";
 import EventForm from "../Forms/EventForm";
-import { IEvent } from "../../../models/tiles";
+import { IEvent } from "../../../models/event";
 
 export default function AdminEventTiles() {
   const [eventList, setEvents] = useState([]);

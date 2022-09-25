@@ -7,8 +7,8 @@ import GoodieTile from "../../Goodies/GoodieTile";
 import TileActions from "../TileActions";
 import { Box, Button, Typography } from "@mui/material";
 import { goodies } from "../../../routes/roots";
-import { IGoodie } from "../../../models/tiles";
-const GoodieForm = React.lazy(() => import("../Forms/GoodieForm"));
+import { IGoodie } from "../../../models/goodie";
+import GoodieForm from "../Forms/GoodieForm";
 
 export default function AdminGoodieTiles() {
   const [goodieLists, setGoodies] = useState([]);

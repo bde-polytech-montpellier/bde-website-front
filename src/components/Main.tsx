@@ -5,7 +5,7 @@ import React, { Suspense, useState } from "react";
 import Nav from "./Navbar/Navbar";
 import { Alert, AlertColor, Snackbar } from "@mui/material";
 import axios from "axios";
-import { User } from "../models";
+import { User } from "../models/user";
 import { SnackbarState } from "../models/index";
 
 const Home = React.lazy(() => import("./Home"));

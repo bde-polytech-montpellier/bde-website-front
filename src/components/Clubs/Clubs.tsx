@@ -3,7 +3,7 @@ import axios from "axios";
 import { clubs } from "../../routes/roots";
 import * as React from "react";
 import ClubTile from "./ClubTile";
-import { IClub } from "../../models/tiles";
+import { IClub } from "../../models/club";
 import CardContainer from "../templates/CardContainer";
 
 export default function Clubs() {

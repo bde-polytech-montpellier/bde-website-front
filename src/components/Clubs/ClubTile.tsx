@@ -2,7 +2,7 @@ import * as React from "react";
 import { Typography, Stack, IconButton } from "@mui/material";
 import { Facebook, Instagram } from "@mui/icons-material";
 import { getClub } from "../../routes/clubs-api";
-import { IClubTile, IClub } from "../../models/tiles";
+import { IClubTile, IClub } from "../../models/club";
 import Card from "../templates/Card";
 
 export default function ClubTile(params: IClubTile) {

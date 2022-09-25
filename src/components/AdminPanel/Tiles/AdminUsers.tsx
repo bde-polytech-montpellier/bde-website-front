@@ -28,7 +28,8 @@ import { styled } from "@mui/material/styles";
 import axios from "axios";
 import { Search } from "@mui/icons-material";
 import { updateUserPermission } from "../../../routes/users-api";
-import { IRole, IUser } from "../../../models/tiles";
+import { IUser } from "../../../models/user";
+import { IRole } from "../../../models/role";
 
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
 
@@ -76,8 +77,8 @@ export default function ManageAccounts() {
       userList.filter(
         (user: IUser) =>
           user.polyuser_name!.toLowerCase().includes(value.toLowerCase()) ||
-          user.polyuser_mail!.toLowerCase().includes(value.toLowerCase())
-      )
+          user.polyuser_mail!.toLowerCase().includes(value.toLowerCase()),
+      ),
     );
   };
 
@@ -86,7 +87,7 @@ export default function ManageAccounts() {
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);

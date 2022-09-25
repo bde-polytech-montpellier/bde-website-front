@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import EventTile from "./EventTile";
 import { events } from "../../routes/roots";
 import axios from "axios";
-import { IEvent } from "../../models/tiles";
+import { IEvent } from "../../models/event";
 import CardContainer from "../templates/CardContainer";
 
 export default function Events() {

@@ -1,10 +1,4 @@
-export interface User {
-  id?: string;
-  name?: string;
-  mail?: string;
-  role?: string;
-  token?: string;
-}
+import { ITileActions } from "./componentFacto";
 
 export interface SnackbarState {
   open: boolean;
@@ -12,27 +6,19 @@ export interface SnackbarState {
   message: string;
 }
 
-export interface NavbarParams {
-  loggedUser: User;
-  setUser: React.Dispatch<React.SetStateAction<User>>;
-  removeCookie: (name: "token") => void;
-  setSnackbarState: React.Dispatch<React.SetStateAction<SnackbarState>>;
-}
-
 export interface InputError {
   component: string;
   error: string;
 }
 
-export interface SignInParams {
-  setSnackbarState: React.Dispatch<React.SetStateAction<SnackbarState>>;
-  setUser: React.Dispatch<React.SetStateAction<User>>;
-  setCookie: (name: "token", value: any, options?: any) => void;
+export interface IDbInfo {}
+
+export interface IPrevTeam {
+  name: string;
+  img: string;
 }
 
-export interface SignupParams {
-  setSnackbarState: React.Dispatch<React.SetStateAction<SnackbarState>>;
-  setUser: React.Dispatch<React.SetStateAction<User>>;
-  user: User;
-  removeCookie: (name: "token") => void;
+export interface ITileActionInfo {
+  TileActions?: React.FC<ITileActions>;
+  setOpenForm?: React.Dispatch<React.SetStateAction<boolean>>;
 }

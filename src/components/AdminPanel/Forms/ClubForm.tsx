@@ -22,8 +22,7 @@ import { Instagram, Facebook } from "@mui/icons-material";
 import axios from "axios";
 import { getClub } from "../../../routes/clubs-api";
 import { clubs } from "../../../routes/roots";
-import { IClubForm } from "../../../models/tiles";
-import { IClubFormData } from "../../../models/forms";
+import { IClubForm, IClubFormData } from "../../../models/club";
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
@@ -123,7 +122,7 @@ export default function ClubForm(params: IClubForm) {
 
   React.useEffect(() => {
     if (params.club.club_id) {
-      setFormValues({
+      setFormValues((formValues) => ({
         ...formValues,
         name: params.club.club_name ?? "",
         short_description: params.club.club_short_description ?? "",
@@ -131,7 +130,7 @@ export default function ClubForm(params: IClubForm) {
         description: params.club.club_description ?? "",
         fb: params.club.club_fb ?? "",
         ig: params.club.club_ig ?? "",
-      });
+      }));
       setImageUrl(params.club.club_pic);
     }
   }, [params.club]);
