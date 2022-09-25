@@ -22,7 +22,22 @@ import { Instagram, Facebook } from "@mui/icons-material";
 import axios from "axios";
 import { getClub } from "../../../routes/clubs-api";
 import { clubs } from "../../../routes/roots";
-import { ClubFormActions, CreateUpdateClubRequest } from "../../../models/club";
+import { ClubTileActions } from "../../../models/club";
+
+interface ClubFormActions extends ClubTileActions {
+  open: boolean;
+  setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface CreateUpdateClubRequest {
+  name: string;
+  pic: File | undefined;
+  imgChanged: boolean;
+  short_description: string;
+  description: string;
+  fb: string;
+  ig: string;
+}
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };

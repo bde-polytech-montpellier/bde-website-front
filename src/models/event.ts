@@ -20,24 +20,3 @@ export interface EventTileActions extends TileActionsInfo {
   event: EventResponse;
   setInfo?: React.Dispatch<React.SetStateAction<EventResponse>>;
 }
-
-export interface EventFormActions extends EventTileActions {
-  open: boolean;
-  setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export interface CreateUpdateEventRequest {
-  name: string;
-  short_description: string;
-  imgChanged: boolean;
-  pic: File | undefined;
-  description: string;
-  date: string;
-  time: string;
-  place: string;
-  datetime: string;
-  price: number | undefined;
-  follower_price: number | undefined;
-  club_id: string;
-  club_name: string;
-}
