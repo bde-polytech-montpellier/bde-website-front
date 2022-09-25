@@ -2,7 +2,11 @@ import * as React from "react";
 import { CssBaseline, Grid, Box, Typography, Container } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Footer from "../Footer";
-import { CardContainer as CardContainerArgs } from "../../models/componentFacto";
+interface CardContainerArgs {
+  title: string;
+  subtitle: string;
+  cards: JSX.Element[];
+}
 
 const theme = createTheme();
 

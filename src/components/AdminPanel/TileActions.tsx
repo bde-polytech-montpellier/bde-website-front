@@ -14,7 +14,7 @@ import {
 import { Edit, DeleteForever } from "@mui/icons-material";
 import axios from "axios";
 import theme from "../../colors/palette";
-import { TileActions as TileActionsArgs } from "../../models/componentFacto";
+import { TileActionsArgs } from "../../models";
 
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
 

@@ -25,11 +25,29 @@ import axios from "axios";
 import { getEvent } from "../../../routes/events-api";
 import { events, clubs } from "../../../routes/roots";
 import { dateParserForInputs } from "../../../utils/dateParser";
-import {
-  EventFormActions,
-  CreateUpdateEventRequest,
-} from "../../../models/event";
 import { ClubResponse } from "../../../models/club";
+import { EventTileActions } from "../../../models/event";
+
+interface EventFormActions extends EventTileActions {
+  open: boolean;
+  setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface CreateUpdateEventRequest {
+  name: string;
+  short_description: string;
+  imgChanged: boolean;
+  pic: File | undefined;
+  description: string;
+  date: string;
+  time: string;
+  place: string;
+  datetime: string;
+  price: number | undefined;
+  follower_price: number | undefined;
+  club_id: string;
+  club_name: string;
+}
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };

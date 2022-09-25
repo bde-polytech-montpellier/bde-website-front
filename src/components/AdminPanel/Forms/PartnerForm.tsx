@@ -22,10 +22,22 @@ import { AlternateEmail, Web } from "@mui/icons-material";
 import axios from "axios";
 import { getPartner } from "../../../routes/partners-api";
 import { partners } from "../../../routes/roots";
-import {
-  PartnerFormAction,
-  CreateUpdatePartnerRequest,
-} from "../../../models/partner";
+import { PartnerTileActions } from "../../../models/partner";
+
+interface PartnerFormAction extends PartnerTileActions {
+  open: boolean;
+  setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface CreateUpdatePartnerRequest {
+  name: string;
+  pic: File | undefined;
+  imgChanged: boolean;
+  short_description: string;
+  description: string;
+  mail: string;
+  website: string;
+}
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };

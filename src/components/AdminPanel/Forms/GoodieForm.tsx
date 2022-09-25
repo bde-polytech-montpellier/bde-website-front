@@ -21,10 +21,20 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import { getGoodie } from "../../../routes/goodies-api";
 import { goodies } from "../../../routes/roots";
-import {
-  GoodieFormActions,
-  CreateUpdateGoodieRequest,
-} from "../../../models/goodie";
+import { GoodieTileActions } from "../../../models/goodie";
+
+interface GoodieFormActions extends GoodieTileActions {
+  open: boolean;
+  setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface CreateUpdateGoodieRequest {
+  name: string;
+  pic: File | undefined;
+  imgChanged: boolean;
+  description: string;
+  price: number | undefined;
+}
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };

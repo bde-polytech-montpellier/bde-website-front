@@ -14,18 +14,3 @@ export interface PartnerTileActions extends TileActionsInfo {
   partner: PartnerResponse;
   setInfo?: React.Dispatch<React.SetStateAction<PartnerResponse>>;
 }
-
-export interface PartnerFormAction extends PartnerTileActions {
-  open: boolean;
-  setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export interface CreateUpdatePartnerRequest {
-  name: string;
-  pic: File | undefined;
-  imgChanged: boolean;
-  short_description: string;
-  description: string;
-  mail: string;
-  website: string;
-}
