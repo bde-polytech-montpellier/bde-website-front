@@ -18,7 +18,7 @@ export default function CardContainer(params: ICardContainer) {
             pb: 0,
           }}
         >
-          <Container maxWidth="sm">
+          <Container maxWidth="md">
             <Typography
               component="h1"
               variant="h2"

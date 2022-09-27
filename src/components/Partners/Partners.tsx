@@ -21,7 +21,7 @@ export default function Parts() {
   return (
     <CardContainer
       title="Nos Partenariats"
-      subtitle="Des bons plans pour les étudiants"
+      subtitle="Sous présentation de la carte étudiante accompagnée de l'intitulé 'Ecole Polytechnique universitaire de Montpellier'"
       cards={partnerships.map((partner: IPartner) => (
         <Tile key={partner.partner_id} partner={partner} />
       ))}
