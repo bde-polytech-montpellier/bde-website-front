@@ -72,7 +72,9 @@ export default function Tile(comps: ICard) {
           <div>
             <DialogContent>
               {comps.dialogBodyText.split("\r\n").map((str, idx) => (
-                <DialogContentText key={idx}>{str}</DialogContentText>
+                <DialogContentText key={idx} mb={1}>
+                  {str}
+                </DialogContentText>
               ))}
             </DialogContent>
             <Divider flexItem />
