@@ -27,10 +27,10 @@ export default function ResponsiveAppBar(params: NavbarParams) {
   const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState<Element | undefined>(
-    undefined
+    undefined,
   );
   const [anchorElUser, setAnchorElUser] = React.useState<Element | undefined>(
-    undefined
+    undefined,
   );
 
   const pages = [
@@ -259,7 +259,7 @@ export default function ResponsiveAppBar(params: NavbarParams) {
             ))}
           </Box>
 
-          <SearchBar sx={{ mr: 2 }}>
+          {/* <SearchBar sx={{ mr: 2 }}>
             <SearchIconWrapper>
               <Search />
             </SearchIconWrapper>
@@ -267,7 +267,7 @@ export default function ResponsiveAppBar(params: NavbarParams) {
               placeholder="WIP Search…"
               inputProps={{ "aria-label": "search" }}
             />
-          </SearchBar>
+          </SearchBar> */}
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
