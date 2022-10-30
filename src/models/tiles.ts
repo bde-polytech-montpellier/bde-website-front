@@ -96,7 +96,7 @@ export interface IPartnerForm extends IPartnerTile {
   setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export interface IUser {
+export interface User {
   polyuser_id?: string;
   polyuser_name?: string;
   polyuser_mail?: string;
@@ -104,7 +104,7 @@ export interface IUser {
   role_name?: string;
 }
 
-export interface IRole {
+export interface Role {
   role_id?: number;
   role_name?: string;
 }

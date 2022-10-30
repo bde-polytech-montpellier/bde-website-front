@@ -28,7 +28,7 @@ import { styled } from "@mui/material/styles";
 import axios from "axios";
 import { Search } from "@mui/icons-material";
 import { updateUserPermission } from "../../../routes/users-api";
-import { IRole, IUser } from "../../../models/tiles";
+import { Role, User } from "../../../models/tiles";
 
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
 
@@ -54,10 +54,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const devs = ["ea99489b-df58-4241-a30f-3d20a70a7d4c"];
 
 export default function ManageAccounts() {
-  const [search, setSearch] = React.useState("");
-  const [userList, setUsers] = React.useState<IUser[]>([]);
-  const [filteredUsers, setFilteredUsers] = React.useState<IUser[]>([]);
-  const [roleList, setRoles] = React.useState([{}]);
+  const [search, setSearch] = React.useState<string>("");
+  const [userList, setUsers] = React.useState<User[]>([]);
+  const [filteredUsers, setFilteredUsers] = React.useState<User[]>([]);
+  const [roleList, setRoles] = React.useState<Role[]>([]);
   const [changes, setChanges] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -74,10 +74,10 @@ export default function ManageAccounts() {
 
     setFilteredUsers(
       userList.filter(
-        (user: IUser) =>
+        (user: User) =>
           user.polyuser_name!.toLowerCase().includes(value.toLowerCase()) ||
-          user.polyuser_mail!.toLowerCase().includes(value.toLowerCase())
-      )
+          user.polyuser_mail!.toLowerCase().includes(value.toLowerCase()),
+      ),
     );
   };
 
@@ -86,7 +86,7 @@ export default function ManageAccounts() {
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -207,7 +207,7 @@ export default function ManageAccounts() {
                           });
                         }}
                       >
-                        {roleList.map((role: IRole) => (
+                        {roleList.map((role: Role) => (
                           <MenuItem value={role.role_id!} key={role.role_id!}>
                             {role.role_name!}
                           </MenuItem>
