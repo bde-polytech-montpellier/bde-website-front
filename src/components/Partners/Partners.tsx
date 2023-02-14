@@ -3,7 +3,7 @@ import axios from "axios";
 import { partners } from "../../routes/roots";
 import * as React from "react";
 import Tile from "./PartnerTile";
-import { IPartner } from "../../models/tiles";
+import { PartnerResponse } from "../../models/partner";
 import CardContainer from "../templates/CardContainer";
 
 export default function Parts() {
@@ -22,7 +22,7 @@ export default function Parts() {
     <CardContainer
       title="Nos Partenariats"
       subtitle="Sous présentation de la carte étudiante accompagnée de l'intitulé 'Ecole Polytechnique universitaire de Montpellier'"
-      cards={partnerships.map((partner: IPartner) => (
+      cards={partnerships.map((partner: PartnerResponse) => (
         <Tile key={partner.partner_id} partner={partner} />
       ))}
     />

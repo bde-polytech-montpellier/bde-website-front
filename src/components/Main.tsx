@@ -5,7 +5,7 @@ import React, { Suspense, useState } from "react";
 import Nav from "./Navbar/Navbar";
 import { Alert, AlertColor, Snackbar } from "@mui/material";
 import axios from "axios";
-import { User } from "../models";
+import { CookieUser } from "../models/user";
 import { SnackbarState } from "../models/index";
 
 const Home = React.lazy(() => import("./Home"));
@@ -20,7 +20,7 @@ const Signup = React.lazy(() => import("./Auth/SignUp"));
 const Admin = React.lazy(() => import("./AdminPanel/AdminPanel"));
 
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
-const defaultUserSate: User = {
+const defaultUserSate: CookieUser = {
   id: undefined,
   name: undefined,
   mail: undefined,
@@ -29,7 +29,7 @@ const defaultUserSate: User = {
 };
 
 function Main() {
-  const [user, setUser] = useState<User>(defaultUserSate);
+  const [user, setUser] = useState<CookieUser>(defaultUserSate);
   const [snackbarState, setSnackbarState] =
     React.useState<SnackbarState>(defaultSnackbarState);
   const [cookies, setCookie, removeCookie] = useCookies([cookieToken]);

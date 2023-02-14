@@ -28,7 +28,8 @@ import { styled } from "@mui/material/styles";
 import axios from "axios";
 import { Search } from "@mui/icons-material";
 import { updateUserPermission } from "../../../routes/users-api";
-import { Role, User } from "../../../models/tiles";
+import { UserResponse } from "../../../models/user";
+import { RoleResponse } from "../../../models/role";
 
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
 
@@ -54,10 +55,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const devs = ["ea99489b-df58-4241-a30f-3d20a70a7d4c"];
 
 export default function ManageAccounts() {
-  const [search, setSearch] = React.useState<string>("");
-  const [userList, setUsers] = React.useState<User[]>([]);
-  const [filteredUsers, setFilteredUsers] = React.useState<User[]>([]);
-  const [roleList, setRoles] = React.useState<Role[]>([]);
+  const [search, setSearch] = React.useState("");
+  const [userList, setUsers] = React.useState<UserResponse[]>([]);
+  const [filteredUsers, setFilteredUsers] = React.useState<UserResponse[]>([]);
+  const [roleList, setRoles] = React.useState([{}]);
   const [changes, setChanges] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -74,7 +75,7 @@ export default function ManageAccounts() {
 
     setFilteredUsers(
       userList.filter(
-        (user: User) =>
+        (user: UserResponse) =>
           user.polyuser_name!.toLowerCase().includes(value.toLowerCase()) ||
           user.polyuser_mail!.toLowerCase().includes(value.toLowerCase()),
       ),
@@ -207,7 +208,7 @@ export default function ManageAccounts() {
                           });
                         }}
                       >
-                        {roleList.map((role: Role) => (
+                        {roleList.map((role: RoleResponse) => (
                           <MenuItem value={role.role_id!} key={role.role_id!}>
                             {role.role_name!}
                           </MenuItem>

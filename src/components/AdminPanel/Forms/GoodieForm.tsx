@@ -21,12 +21,24 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import { getGoodie } from "../../../routes/goodies-api";
 import { goodies } from "../../../routes/roots";
-import { IGoodieForm } from "../../../models/tiles";
-import { IGoodieFormData } from "../../../models/forms";
+import { GoodieTileActions } from "../../../models/goodie";
+
+interface GoodieFormActions extends GoodieTileActions {
+  open: boolean;
+  setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface CreateUpdateGoodieRequest {
+  name: string;
+  pic: File | undefined;
+  imgChanged: boolean;
+  description: string;
+  price: number | undefined;
+}
 
 const theme = createTheme();
 const defaultSnackbarState = { open: false, severity: "info", message: "" };
-const defaultState: IGoodieFormData = {
+const defaultState: CreateUpdateGoodieRequest = {
   name: "",
   pic: undefined,
   imgChanged: false,
@@ -34,14 +46,14 @@ const defaultState: IGoodieFormData = {
   price: undefined,
 };
 
-export default function GoodieForm(params: IGoodieForm) {
+export default function GoodieForm(params: GoodieFormActions) {
   const [imageUrl, setImageUrl] = React.useState<string | undefined>(
     params.goodie.goodie_pic,
   );
   const [snackbarState, setSnackbarState] =
     React.useState(defaultSnackbarState);
   const [formValues, setFormValues] =
-    React.useState<IGoodieFormData>(defaultState);
+    React.useState<CreateUpdateGoodieRequest>(defaultState);
 
   const handleCloseForm = () => {
     params.setInfo!({
@@ -117,14 +129,14 @@ export default function GoodieForm(params: IGoodieForm) {
 
   React.useEffect(() => {
     if (params.goodie.goodie_id) {
-      setFormValues({
+      setFormValues((formValues) => ({
         ...formValues,
         name: params.goodie.goodie_name ?? "",
         pic: undefined,
         imgChanged: false,
         description: params.goodie.goodie_description ?? "",
         price: params.goodie.goodie_price,
-      });
+      }));
       setImageUrl(params.goodie.goodie_pic);
     }
   }, [params.goodie]);
